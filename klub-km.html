@@ -498,7 +498,7 @@ h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wra
       <li><b>Кондиционер</b><p>В зале работает кондиционер.</p></li>
       <li><b>Клубные аккаунты</b><p>Есть клубные аккаунты на платные игры, если своего аккаунта нет.</p></li>
       <li><b>Девайсы</b><p>Можно прийти со своими. Гарнитуру HyperX и мышь Logitech G PRO можно взять напрокат на стойке.</p></li>
-      <li><b>PS5</b><p>TV-комнаты с PS5 и проекторная — на <a class="link" href="klub-gs.html">Героев-Североморцев, 62</a>.</p></li>
+      <li><b>PS5</b><p>TV-комната с PS5 и проекторная с PS5 — на <a class="link" href="klub-gs.html">Героев-Североморцев, 62</a>.</p></li>
     </ul>
   </section>
 
@@ -551,7 +551,7 @@ h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wra
       <details><summary>Есть ли парковка?</summary><p>Да, рядом с клубом есть парковка.</p></details>
       <details><summary>Можно выбрать конкретное место?</summary><p>Да. Номера мест на схеме совпадают с номерами в приложении LANGAME. Выберите место на схеме и забронируйте его в приложении — при брони скидка 5 %.</p></details>
       <details><summary>Можно прийти компанией и сесть рядом?</summary><p>Да. В Bootcamp шесть мест в одной комнате, в общем зале места стоят рядами — какие места рядом, видно на схеме.</p></details>
-      <details><summary>А где поиграть на PS5?</summary><p>TV-комнаты с PS5 и проекторная с PS5 — на второй точке, <a class="link" href="klub-gs.html">Героев-Североморцев, 62</a>.</p></details>
+      <details><summary>А где поиграть на PS5?</summary><p>TV-комната с PS5 и проекторная с PS5 — на второй точке, <a class="link" href="klub-gs.html">Героев-Североморцев, 62</a>.</p></details>
     </div>
   </section>
 
@@ -560,7 +560,7 @@ h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wra
       <img src="img/gs-hall.jpg" alt="" width="1280" height="853" loading="lazy">
       <p class="kick">Вторая точка · Ленинский округ</p>
       <h2>БАЗА на Героев-Североморцев, 62</h2>
-      <p>29 ПК: Стандарт, Bootcamp, три комнаты Solo, две TV-комнаты с PS5 и проекторная с PS5. Тоже круглосуточно.</p>
+      <p>29 ПК: Стандарт, Bootcamp, три комнаты Solo, TV-комната с PS5 и проекторная с PS5. Тоже круглосуточно.</p>
       <span class="go">О клубе →</span>
     </a>
   </div>
@@ -591,7 +591,7 @@ h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wra
   svg.querySelectorAll('.seat,.room').forEach(function(g){ g.setAttribute('tabindex','0'); g.setAttribute('role','button'); });
   function count(z){ return svg.querySelectorAll('.seat.z-'+z).length; }
   legend.innerHTML=[['standard','','Стандарт'],['vip','v','Bootcamp · VIP']].map(function(it){
-    var n = it[0]==='rooms' ? '3 комнаты' : count(it[0]);
+    var n = it[0]==='rooms' ? '2 комнаты' : count(it[0]);
     return '<li class="'+it[1]+'"><button type="button" aria-pressed="false" data-z="'+it[0]+'"><i></i>'+it[2]+'<span class="n">'+n+'</span></button></li>';
   }).join('');
   legend.addEventListener('click',function(e){
@@ -606,7 +606,7 @@ h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wra
     var z=g.dataset.zone, html;
     if(z==='ps5'||z==='projector'){
       var cap = z==='ps5' ? 'до 4 человек · 2 геймпада' : 'до 10 человек · PS5, стол и два дивана';
-      var nm = z==='ps5' ? 'PS5 · '+g.dataset.room.slice(-1) : 'Проекторная';
+      var nm = z==='ps5' ? 'TV-комната с PS5' : 'Проекторная';
       html='<div class="t"><b>'+nm+'</b><span>Комната</span></div><dl><dt>Кто поместится</dt><dd>'+cap+'</dd></dl><p class="pr num">'+P[z]+' ₽ в час<small>за всю комнату</small></p>';
     } else {
       var hw=HW[z], pr=P[z]['1'], label = z==='solo' ? g.querySelector('text').textContent : 'Место '+g.dataset.seat;

@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Сайт БАЗЫ</title>
+<meta name="description" content="Компьютерный клуб БАЗА в Мурманске: два зала, 51 ПК, круглосуточно.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Раскладка: тёмный зал ночью. Фото от края до края, свет — голубой и синий бренда, как подсветка в залах.
+   Каждая секция устроена по-своему: панели клубов, схема, бенто зон, липкая история железа, калькулятор,
+   полоса «Ночь», список акций, комнаты для компаний, рейтинг и вопросы. Одна тема — тёмная (решение владельца 30.09.2026). */
+:root{
+  color-scheme:dark;
+  --night:#07041A;     /* фон страницы: индиго бренда, опущенный почти до чёрного */
+  --indigo:#170C48;    /* панели, подложки — индиго брендбука */
+  --indigo-2:#221660;  /* приподнятые элементы */
+  --line:#2C2470;      /* разделители */
+  --ink:#F4F3FF;       /* основной текст */
+  --ink-2:#ABA7D8;     /* вторичный текст */
+  --ink-3:#8480BE;     /* подписи, сноски */
+  --blue:#3C6EFF;      /* единственный интерактивный цвет */
+  --blue-hi:#6F95FF;   /* синий на тёмном для мелкого текста */
+  --sky:#3CAFFF;       /* свет: ссылки, подсветка, мониторы */
+  --cyan:#01C2DE;      /* второй свет: Solo, лента */
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --g:clamp(16px,4vw,56px);   /* боковое поле */
+  --max:1320px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;background:var(--night)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--night);color:var(--ink);font:17px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,p{margin:0}
+h2,h3{font-family:var(--display);line-height:1.02;text-wrap:balance;letter-spacing:-.02em}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--blue);color:#fff;padding:10px 14px;font-weight:600;text-decoration:none}
+.skip:focus{top:12px}
+section{scroll-margin-top:72px}
+
+/* типографика секций: маленькая строка-ярлык + крупный заголовок */
+.kick{font:500 13px/1.2 var(--display);text-transform:uppercase;letter-spacing:.16em;color:var(--sky)}
+.h2{font-size:clamp(36px,6.2vw,88px);font-weight:900;text-transform:uppercase}
+.h2 .lt{font-weight:300}
+.lead{color:var(--ink-2);max-width:56ch;font-size:18px}
+
+/* кнопки */
+.btn{--bg:var(--blue);display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:12px;background:var(--bg);color:#fff;
+  font:700 15px/1 var(--display);letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s var(--ease),background .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(60,110,255,.8)}
+.btn .ar{transition:transform .15s var(--ease)}
+.btn:hover .ar{transform:translateX(2px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(244,243,255,.5)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.sm{min-height:44px;padding:0 16px;font-size:13px}
+.btn .bi{width:20px;height:20px;flex:none;margin-left:-4px}
+.link{color:var(--sky);text-underline-offset:3px}
+
+/* ─── шапка ─── */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .25s,border-color .25s;border-bottom:1px solid transparent}
+.top.solid{background:rgba(7,4,26,.94);border-bottom-color:var(--line)}
+.top .bar{display:flex;align-items:center;gap:28px;height:68px;max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+.logo{display:block;width:104px;color:var(--ink)}
+.logo svg{display:block;width:100%;height:auto}
+.nav{display:flex;gap:22px;margin-left:auto;font-weight:500;font-size:15px}
+.nav a{text-decoration:none;color:var(--ink-2);padding:10px 0;transition:color .15s}
+.nav a:hover{color:var(--ink)}
+.top .btn{min-height:44px}
+.menu-btn{display:none;margin-left:auto;background:none;border:0;color:var(--ink);font:600 15px var(--body);min-height:44px;padding:0 4px;cursor:pointer}
+@media (max-width:980px){
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--night);border-bottom:1px solid var(--line);padding:8px var(--g) 16px}
+  .nav.open{display:flex}
+  .nav a{padding:12px 0;font-size:18px;color:var(--ink)}
+  .menu-btn{display:block}
+  .top .btn{display:none}
+}
+
+/* соцсети иконками: Telegram-канал и группа VK */
+.soc{display:flex;gap:8px;align-items:center}
+.soc a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line);transition:color .15s,background .15s,box-shadow .15s}
+.soc a:hover{color:var(--ink);background:var(--indigo-2);box-shadow:inset 0 0 0 1px var(--sky)}
+.soc svg{width:20px;height:20px}
+.soc.lg a{width:52px;height:52px;background:var(--night);color:var(--ink)}
+.soc.lg a:hover{background:var(--indigo-2)}
+.soc.lg svg{width:24px;height:24px}
+.nav + .soc{margin-left:-4px}
+@media (max-width:980px){
+  .top .soc{margin-left:auto}
+  .top .menu-btn{margin-left:4px}
+}
+
+/* «Мой НАГРИНД»: вход в бонусы для тех, кто уже в программе. Цвета сайта, без лайма — лайм только в блоке НАГРИНД.
+   Ссылка — baza.nagrind.ru/join: на компьютере QR, на телефоне выбор Telegram или VK. */
+.top .bar{gap:20px}
+.nav{gap:18px}
+.top .my-app{padding:0 16px}
+.nav .nav-app{display:none}
+@media (max-width:1320px){.top .soc{display:none}}
+@media (max-width:1240px){.top .my-app{display:none}}
+.nav a,.top .btn{white-space:nowrap}
+@media (max-width:980px){
+  .top .soc{display:flex}
+  .nav .nav-app{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;min-height:48px;border-radius:12px;box-shadow:inset 0 0 0 1.5px rgba(244,243,255,.5);font:700 15px/1 var(--display)}
+}
+
+/* выбор клуба для брони: у каждой точки своя страница в LANGAME */
+.bookd{border:0;padding:0;background:transparent;color:var(--ink);max-width:min(520px,calc(100vw - 32px));width:100%}
+.bookd::backdrop{background:rgba(7,4,26,.72)}
+.bookd .box{background:var(--indigo-2);border-radius:24px;padding:24px;display:grid;gap:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 1px var(--line)}
+.bookd .hd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bookd h2{font:900 24px/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:0}
+.bookd .x{width:44px;height:44px;border-radius:50%;border:0;background:var(--indigo);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.bookd a.c{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:16px 18px;border-radius:16px;background:var(--indigo);text-decoration:none;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .15s,background .15s}
+.bookd a.c:hover,.bookd a.c:focus-visible{background:#1D1356;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.bookd a.c b{font:700 18px/1.2 var(--display)}
+.bookd a.c span{grid-column:1;font-size:14px;color:var(--ink-2)}
+.bookd a.c i{grid-row:1/3;grid-column:2;font-style:normal;color:var(--sky);font:700 20px var(--display)}
+.bookd p.n{font-size:14px;color:var(--ink-2)}
+
+/* ─── первый экран ─── */
+.hero{position:relative;min-height:min(100svh,940px);display:grid;align-items:end;isolation:isolate;overflow:hidden}
+.hero .ph{position:absolute;inset:0;z-index:-2}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero .ph .off{filter:brightness(.16) saturate(.2)}
+.hero .ph .on{position:absolute;inset:0}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(180deg,rgba(7,4,26,.7) 0,rgba(7,4,26,0) 22%,rgba(7,4,26,0) 42%,rgba(7,4,26,.86) 78%,var(--night) 100%)}
+.hero .in{width:100%;max-width:var(--max);margin-inline:auto;padding:120px var(--g) 36px;display:grid;gap:28px}
+.hero h1{font-family:var(--display);font-weight:500;line-height:1;margin:0}
+.hero h1 .k{display:block;font-size:clamp(16px,2vw,24px);letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--ink)}
+.hero h1 .word{display:flex;font-weight:900;font-size:clamp(64px,calc((100vw - 2 * var(--g)) / 3.62),350px);letter-spacing:-.04em;line-height:.86;margin:.1em 0 .14em -.04em}
+.hero h1 .word span{display:block;text-shadow:0 0 60px rgba(60,175,255,.35)}
+/* «лесенка» как в логотипе: А и З приподняты и опущены */
+.hero h1 .word span:nth-child(2){transform:translateY(-.07em)}
+.hero h1 .word span:nth-child(3){transform:translateY(.05em)}
+.hero h1 .word span:nth-child(4){transform:translateY(-.03em)}
+.hero h1 .c{display:block;font-size:clamp(16px,2vw,24px);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.hero .row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px}
+.now{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(7,4,26,.72);box-shadow:inset 0 0 0 1px rgba(60,175,255,.45);font-size:15px}
+.now b{font-weight:600}
+.now .dot{width:8px;height:8px;border-radius:50%;background:var(--sky);box-shadow:0 0 0 4px rgba(60,175,255,.2)}
+.stats{display:flex;flex-wrap:wrap;border-top:1px solid rgba(244,243,255,.22);padding-top:18px;gap:14px 0}
+.stats > *{padding-right:28px;margin-right:28px;border-right:1px solid rgba(244,243,255,.22);display:grid;gap:2px}
+.stats > *:last-child{border-right:0}
+.stats b{font:700 clamp(24px,2.6vw,34px)/1 var(--display);letter-spacing:-.02em}
+.stats span{font-size:14px;color:var(--ink-2)}
+.stats a{text-decoration:none}
+.stats a:hover span{color:var(--ink);text-decoration:underline}
+.bmark{position:absolute;right:var(--g);top:96px;display:grid;justify-items:center;gap:6px;font:900 15px/1 var(--display);color:var(--ink);opacity:.9}
+.bmark::before{content:"";width:3px;height:52px;background:var(--ink);margin-bottom:6px}
+.skipfx{position:absolute;right:var(--g);bottom:18px;background:none;border:0;color:var(--ink-2);font:500 13px var(--body);cursor:pointer;min-height:44px}
+@media (max-width:640px){
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .stats > *{padding:0;margin:0;border:0}
+  .bmark{display:none}
+  .hero .in{padding-bottom:28px}
+  .hero h1 .k,.hero h1 .c{font-size:14px;letter-spacing:.1em}
+}
+
+/* «зал включается»: светлый слой проявляется полосой слева направо с миганием, затем загораются буквы */
+@property --p{syntax:"<percentage>";inherits:false;initial-value:120%}
+.fx .hero .ph .on{animation:sweep 1s .15s var(--ease) both, flick .5s .15s steps(1) both;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(var(--p) - 14%),transparent var(--p));mask-image:linear-gradient(90deg,#000 calc(var(--p) - 14%),transparent var(--p))}
+@keyframes sweep{from{--p:0%}to{--p:120%}}
+@keyframes flick{0%{opacity:.35}20%{opacity:.9}35%{opacity:.4}55%{opacity:1}}
+.fx .hero h1 .word span{animation:lamp .5s steps(1) both}
+.fx .hero h1 .word span:nth-child(1){animation-delay:.45s}
+.fx .hero h1 .word span:nth-child(2){animation-delay:.6s}
+.fx .hero h1 .word span:nth-child(3){animation-delay:.75s}
+.fx .hero h1 .word span:nth-child(4){animation-delay:.9s}
+@keyframes lamp{0%{opacity:.08}30%{opacity:.8}45%{opacity:.25}60%{opacity:1}}
+.fx .hero .k,.fx .hero .c,.fx .hero .row,.fx .hero .stats{animation:rise .4s var(--ease) both}
+.fx .hero .k{animation-delay:.3s}.fx .hero .c{animation-delay:1s}.fx .hero .row{animation-delay:1.05s}.fx .hero .stats{animation-delay:1.15s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.hero.done *,.hero.done .ph .on{animation:none!important}
+
+/* ─── лента фактов ─── */
+.rib-wrap{position:relative;z-index:2;overflow:hidden;padding-block:28px;margin-block:-28px}
+.ribbon{position:relative;margin:-8px -8px 0;transform:rotate(-2deg);background:var(--cyan);color:var(--indigo);overflow:hidden;
+  border-block:3px solid var(--night)}
+.ribbon .track{display:flex;width:max-content;animation:run 38s linear infinite}
+.ribbon:hover .track,.ribbon:focus-within .track{animation-play-state:paused}
+.ribbon ul{display:flex;list-style:none;margin:0;padding:14px 0;gap:0}
+.ribbon li{font:900 clamp(15px,1.6vw,20px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;padding-inline:22px;display:flex;align-items:center;gap:44px}
+.ribbon li::after{content:"";width:9px;height:9px;background:var(--indigo);transform:rotate(45deg)}
+@keyframes run{to{transform:translateX(-50%)}}
+.ribbon .pause{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:0;background:var(--indigo);color:var(--ink);cursor:pointer;opacity:0}
+.ribbon .pause:focus-visible{opacity:1}
+.ribbon.paused .track{animation-play-state:paused}
+
+/* ─── клубы: две панели, наведённая раскрывается ─── */
+.clubs{padding-top:clamp(72px,10vw,140px)}
+.clubs .head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:24px 48px;align-items:end;margin-bottom:40px}
+.panels{display:flex;gap:3px;height:clamp(600px,82vh,780px);padding-inline:3px}
+.panel{position:relative;flex:1 1 0;min-width:0;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(20px,3vw,40px);transition:flex-grow .6s var(--ease)}
+.panels:hover .panel:hover,.panels .panel:focus-within{flex-grow:1.35}
+.panel > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s var(--ease),filter .6s}
+.panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,4,26,.55) 0,rgba(7,4,26,.1) 30%,rgba(7,4,26,.78) 62%,rgba(7,4,26,.97) 100%)}
+.panels:hover .panel:not(:hover) > img{filter:brightness(.55) saturate(.6)}
+.panel:hover > img{transform:scale(1.03)}
+.panel .pc{display:flex;align-items:flex-start;gap:14px}
+.panel .pc b{font:900 clamp(120px,15vw,220px)/.8 var(--display);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px var(--ink);transition:color .5s var(--ease)}
+.panel:hover .pc b,.panel:focus-within .pc b{color:var(--ink)}
+.panel .pc span{font:700 16px/1.2 var(--display);text-transform:uppercase;letter-spacing:.1em;padding-top:10px}
+.panel .pc span small{display:block;font:500 13px/1.4 var(--body);text-transform:none;letter-spacing:0;color:var(--ink-2);margin-top:6px}
+.panel h3{font-size:clamp(26px,3vw,40px);font-weight:900;text-transform:uppercase}
+.panel .body{display:grid;gap:16px;max-width:560px}
+.panel .zl{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.panel .zl li{font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:rgba(244,243,255,.1);box-shadow:inset 0 0 0 1px rgba(244,243,255,.18)}
+.panel .zl .v{box-shadow:inset 0 0 0 1px var(--blue)}
+.panel .zl .s{box-shadow:inset 0 0 0 1px var(--cyan)}
+.panel .meta{display:flex;flex-wrap:wrap;gap:6px 22px;color:var(--ink-2);font-size:15px}
+.panel .meta .tel{color:var(--ink);font-weight:600;user-select:all}
+.panel .acts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:860px){
+  .clubs .head{grid-template-columns:1fr}
+  .panels{flex-direction:column;height:auto;padding-inline:0}
+  .panel{min-height:600px}
+  .panels:hover .panel:not(:hover) > img{filter:none}
+  .panel .pc b{color:var(--ink)}
+}
+
+/* ─── схема зала ─── */
+.map{padding-block:clamp(88px,11vw,160px) 0}
+.map .grid{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);grid-template-rows:auto auto 1fr;grid-template-areas:"tabs board" "legend board" "card board";gap:22px clamp(24px,3vw,48px);align-items:start;margin-top:40px}
+.map .seg{grid-area:tabs;display:grid;grid-template-columns:1fr 1.45fr;width:100%;max-width:420px}
+.map .seg button{justify-content:center;text-align:center;padding:6px 10px;font-size:14px;line-height:1.15}.legend{grid-area:legend}#seat-card{grid-area:card}.board{grid-area:board}
+.seg{display:inline-flex;padding:4px;border-radius:14px;background:var(--indigo);box-shadow:inset 0 0 0 1px var(--line);gap:4px;flex-wrap:wrap}
+.seg button,.seg label{min-height:44px;padding:0 16px;border-radius:10px;border:0;background:transparent;color:var(--ink-2);font:600 15px var(--body);cursor:pointer;display:inline-flex;align-items:center;transition:background .15s,color .15s}
+.seg button[aria-selected="true"],.seg input:checked + label{background:var(--blue);color:#fff}
+.seg button:hover,.seg label:hover{color:var(--ink)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:focus-visible + label{outline:2px solid var(--sky);outline-offset:2px}
+.legend{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.legend button{width:100%;display:flex;align-items:center;gap:12px;min-height:44px;padding:0 14px;border-radius:10px;border:0;background:transparent;color:var(--ink);font:500 15px var(--body);cursor:pointer;text-align:left}
+.legend button:hover,.legend button[aria-pressed="true"]{background:var(--indigo)}
+.legend i{width:16px;height:16px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--ink-2);flex:none}
+.legend .v i{box-shadow:inset 0 0 0 2px var(--blue);background:rgba(60,110,255,.25)}
+.legend .s i{box-shadow:inset 0 0 0 2px var(--cyan);background:rgba(1,194,222,.2)}
+.legend .r i{box-shadow:inset 0 0 0 2px var(--ink-3);border-radius:50%}
+.legend .n{margin-left:auto;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.card{background:var(--indigo);border-radius:20px;padding:22px;display:grid;gap:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.card .t{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.card .t b{font:900 28px/1 var(--display);letter-spacing:-.02em}
+.card .t span{font:700 12px/1 var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--sky)}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15px}
+.card dt{color:var(--ink-2)}
+.card dd{margin:0;font-weight:500;text-align:right}
+.card .pr{font:700 18px/1.3 var(--display)}
+.card .pr small{display:block;font:400 14px var(--body);color:var(--ink-2)}
+.board{position:relative;border-radius:24px;background:#0B0726;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.board .scroll{overflow-x:auto;overscroll-behavior-x:contain;padding:12px}
+.board .hint{display:none;padding:12px 16px 0;font-size:14px;color:var(--ink-2)}
+@media (max-width:980px){
+  .map .grid{grid-template-columns:1fr}
+  .map .grid{grid-template-areas:"tabs" "legend" "board" "card";grid-template-rows:none}
+  .board .hint{display:block}
+}
+
+/* схема в тёмной теме */
+.hall{display:block;width:100%;min-width:720px;height:auto;font-family:var(--body)}
+.hall .dot{fill:#2A2A6A}
+.hall .building{fill:#0E0930}
+.hall .area{fill:#120B38}.hall .area.z-vip{fill:#141B5C}.hall .area.z-solo{fill:#0B2143}.hall .area.z-ps5,.hall .area.z-projector{fill:#150F42}.hall .area.z-none{fill:#0E0930}
+.hall .beam-a{stop-color:#3CAFFF;stop-opacity:.28}.hall .beam-b{stop-color:#3CAFFF;stop-opacity:0}
+.hall .walls line{stroke:#5B57A0;stroke-width:3.5;stroke-linecap:square}.hall .walls line.outer{stroke:#BDB8EE;stroke-width:5}
+.hall .door{fill:none;stroke:#57538A;stroke-width:1.2}.hall .door.main{stroke:#F4F3FF;stroke-width:1.8}
+.hall .screen-wall{stroke:#3CAFFF;stroke-width:4;stroke-linecap:round}
+.hall .zlabel{fill:#8C88C4;font-family:var(--display);font-size:9.5px;font-weight:700;letter-spacing:.14em}
+.hall .zlabel.vip{fill:#6F95FF}.hall .zlabel.solo{fill:#01C2DE}
+.hall .room .hit{fill:transparent}.hall .room-label{fill:#F4F3FF;font-size:11.5px;font-weight:600}.hall .room-label.muted{fill:#6E6AA8}
+.hall .ico path,.hall .ico circle,.hall .ico rect{fill:none;stroke:#BDB8EE;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.hall .desks rect{fill:#241B63}
+.hall .furn rect{fill:#1A1350;stroke:#57538A;stroke-width:1.2}.hall .furn .back{fill:#57538A;stroke:none}.hall .proj-dev{fill:#3CAFFF}
+.hall .cap{fill:#8C88C4;font-size:10.5px}
+.hall .counter .top{fill:#1A1350;stroke:#BDB8EE;stroke-width:1.4}.hall .counter .chair{fill:#120B38;stroke:#57538A}
+.hall .counter .mon{fill:#3CAFFF}.hall .counter .zone{fill:none;stroke:#57538A;stroke-dasharray:4 4}
+.hall .stairs rect{fill:#120B38}.hall .stairs line{stroke:#57538A;stroke-width:1.2}.hall .stairs .dir{fill:none;stroke:#BDB8EE;stroke-width:1.4;stroke-linecap:round}
+.hall .entrance path{stroke:#F4F3FF;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hall .entrance text{fill:#F4F3FF;font-size:12px;font-weight:700}
+.hall .route{display:none}
+/* места: выключенный монитор тёмный; когда схема видна, ряды загораются по очереди */
+.hall .seat,.hall .room{cursor:pointer;outline:none;transition:opacity .25s}
+.hall .seat .body{fill:#17104A;stroke:#8C88C4;stroke-width:1.4;transition:fill .2s,stroke .2s}
+.hall .seat .mon{fill:#2A2366;transition:fill .3s}
+.hall .seat text{fill:#F4F3FF;font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums;pointer-events:none}
+.hall .z-vip .body{stroke:#3C6EFF;fill:#18206A}
+.hall .z-solo .body{stroke:#01C2DE;fill:#0B2A4E}
+.board.lit .seat .mon{fill:#3CAFFF;transition-delay:calc(var(--i,0) * 35ms)}
+.board.lit .z-vip .mon{fill:#6F95FF}
+.board.lit .z-solo .mon{fill:#01C2DE}
+.hall .seat:hover .body,.hall .seat:focus-visible .body{stroke:#F4F3FF;stroke-width:2}
+.hall .seat:focus-visible .body{stroke-width:3}
+.hall .room:hover .hit,.hall .room:focus-visible .hit{fill:rgba(60,175,255,.08);stroke:#3CAFFF;stroke-width:1.5}
+.hall .seat.sel .body{fill:#F4F3FF;stroke:#F4F3FF}
+.hall .seat.sel text{fill:#170C48}
+.hall .room.sel .hit{fill:rgba(60,175,255,.14);stroke:#F4F3FF;stroke-width:2}
+.board[data-focus] .seat,.board[data-focus] .room{opacity:.28}
+.board[data-focus="standard"] .z-standard,.board[data-focus="vip"] .z-vip,.board[data-focus="solo"] .z-solo,
+.board[data-focus="rooms"] .room{opacity:1}
+
+/* ─── зоны: бенто ─── */
+.zones{padding-block:clamp(96px,12vw,170px) 0}
+.zones .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:40px}
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(150px,auto);gap:12px}
+.tile{position:relative;overflow:hidden;isolation:isolate;border-radius:22px;padding:clamp(18px,2.2vw,28px);display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:300px;background:var(--indigo)}
+.tile > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s var(--ease)}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,4,26,0) 25%,rgba(7,4,26,.92) 100%)}
+.tile:hover > img{transform:scale(1.04)}
+.tile > *{flex-shrink:0}
+.tile .where{position:absolute;top:18px;left:clamp(18px,2.2vw,28px);font:700 11px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;border-radius:999px;background:rgba(7,4,26,.72)}
+.tile h3{font-size:clamp(22px,2.4vw,34px);font-weight:900;text-transform:uppercase}
+.tile h3 a{text-decoration:none}
+.tile h3 a::after{content:" →";font-weight:300;color:var(--sky)}
+.tile h3 a:hover{color:var(--sky)}
+.tile .big{font:900 clamp(40px,5vw,72px)/.9 var(--display);letter-spacing:-.04em}
+.tile .big small{font-size:.36em;letter-spacing:0;font-weight:500;margin-left:.2em}
+.tile .from{font-size:15px;color:var(--ink-2)}
+.tile .from b{color:var(--ink);font-weight:600}
+.tile .spec{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:14px;color:var(--ink-2);max-height:0;opacity:0;transition:max-height .45s var(--ease),opacity .3s}
+.tile:hover .spec,.tile:focus-within .spec{max-height:120px;opacity:1}
+@media (hover:none){.tile .spec{max-height:none;opacity:1}}
+.t-std{grid-column:span 7;grid-row:span 2}
+.t-std .big{font-size:clamp(64px,8vw,120px)}
+.t-vip{grid-column:span 5}
+.t-solo{grid-column:span 5}
+.t-ps5{grid-column:span 4}
+.t-proj{grid-column:span 4}
+.t-note{grid-column:span 4;background:var(--indigo-2);box-shadow:inset 0 0 0 1px var(--blue);min-height:0;justify-content:space-between}
+.t-note::after{display:none}
+.t-note p{font:700 clamp(20px,2vw,26px)/1.2 var(--display);letter-spacing:-.01em}
+.t-note .mini{font:400 15px/1.5 var(--body);color:var(--ink-2)}
+.t-vip .big{color:#9DB6FF}.t-solo .big{color:var(--cyan)}
+@media (max-width:980px){
+  .t-std,.t-vip,.t-solo,.t-ps5,.t-proj,.t-note{grid-column:span 6;grid-row:auto}
+  .t-std{grid-column:span 12}
+}
+@media (max-width:620px){.bento > *{grid-column:1/-1!important}.tile{min-height:320px}}
+
+/* ─── железо: липкая история ─── */
+.iron{padding-block:clamp(96px,12vw,170px) 0}
+.story{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,72px);margin-top:48px}
+.stage{position:sticky;top:88px;height:calc(100svh - 120px);max-height:760px;border-radius:24px;overflow:hidden;background:var(--indigo)}
+.stage figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .5s var(--ease)}
+.stage figure.on{opacity:1}
+.stage{container-type:inline-size}
+.stage .mega{white-space:nowrap;font-size:clamp(48px,13cqw,150px)}
+.stage img{width:100%;height:100%;object-fit:cover;filter:brightness(.62)}
+.stage figcaption{position:absolute;left:clamp(20px,3vw,40px);right:20px;bottom:clamp(20px,3vw,36px)}
+.mega{font:900 clamp(64px,9.5vw,150px)/.85 var(--display);letter-spacing:-.05em;display:block}
+.mega small{display:block;font:500 clamp(14px,1.3vw,17px)/1.3 var(--body);letter-spacing:0;color:var(--ink-2);margin-top:14px}
+.steps{display:grid}
+.step{min-height:78vh;display:grid;align-content:center;gap:18px;padding-block:24px}
+.step h3{font-size:clamp(26px,3vw,40px);font-weight:900;text-transform:uppercase}
+.step p{color:var(--ink-2);max-width:48ch}
+.step .rows{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.step .rows li{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+.step .rows li span{color:var(--ink-2)}
+.step .rows li b{font-weight:600}
+.step .inline{display:none}
+.spec-t{margin-top:clamp(56px,7vw,96px);overflow-x:auto}
+.spec-t table{width:100%;min-width:720px;border-collapse:collapse;font-size:15px}
+.spec-t th,.spec-t td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.spec-t thead th{font:700 13px/1.2 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.spec-t thead th.v{color:#9DB6FF}.spec-t thead th.s{color:var(--cyan)}
+.spec-t tbody th{font-weight:500;color:var(--ink-2);width:18%}
+.spec-t td{font-weight:500}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}
+  .stage{display:none}
+  .step{min-height:0;padding-block:28px}
+  .step .inline{display:block;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+  .step .inline img{width:100%;height:100%;object-fit:cover;filter:brightness(.62)}
+  .step .inline .mega{position:absolute;left:18px;bottom:16px;font-size:clamp(52px,16vw,88px)}
+}
+
+/* ─── калькулятор ─── */
+.calc{padding-block:clamp(96px,12vw,170px) 0}
+.calc .box{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);border-radius:28px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.calc form{padding:clamp(20px,3vw,40px);display:grid;gap:24px;background:#0B0726}
+.calc fieldset{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
+.calc legend{font:700 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding:0;margin-bottom:10px}
+.calc .seg{position:relative}
+.calc .seg input:disabled + label{opacity:.35;cursor:not-allowed}
+.fnote{font-size:14px;color:var(--ink-2);margin-top:2px}
+.switch{display:flex;align-items:center;gap:14px;cursor:pointer;min-height:44px;font-weight:500}
+.switch input{appearance:none;width:52px;height:30px;border-radius:999px;background:var(--indigo-2);box-shadow:inset 0 0 0 1px var(--line);position:relative;cursor:pointer;flex:none;margin:0;transition:background .15s}
+.switch input::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:var(--ink);transition:transform .18s var(--ease)}
+.switch input:checked{background:var(--blue)}
+.switch input:checked::after{transform:translateX(22px)}
+.switch input:disabled{opacity:.4;cursor:not-allowed}
+.switch small{display:block;color:var(--ink-2);font-weight:400;font-size:14px}
+.calc .out{position:relative;isolation:isolate;padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:var(--indigo);overflow:hidden}
+.calc .out > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.35}
+.calc .out::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(160deg,rgba(23,12,72,.55),rgba(23,12,72,.96) 70%)}
+.calc .what{font:700 14px/1.3 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--sky)}
+.calc .price{font:900 clamp(72px,9vw,136px)/.9 var(--display);letter-spacing:-.05em;display:flex;align-items:baseline;gap:.12em;flex-wrap:wrap}
+.calc .price .cur{font-size:.42em;letter-spacing:0}
+.calc .old{font:500 20px var(--display);color:var(--ink-3);text-decoration:line-through;min-height:1.2em}
+.calc .facts{display:grid;gap:8px;margin:0;padding:0;list-style:none;font-size:16px;color:var(--ink-2)}
+.calc .facts b{color:var(--ink);font-weight:600}
+.day{margin-top:12px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 40px;padding:clamp(20px,3vw,36px) clamp(20px,3vw,40px);border-radius:28px;background:var(--sky);color:var(--indigo)}
+.day .n{font:900 clamp(80px,11vw,160px)/.8 var(--display);letter-spacing:-.06em}
+.day .n small{font-size:.3em;letter-spacing:0;font-weight:700}
+.day h3{font-size:clamp(22px,2.4vw,32px);font-weight:900;text-transform:uppercase}
+.day p{font-size:17px;max-width:46ch;margin-top:8px}
+.day .btn{--bg:var(--indigo)}
+@media (max-width:900px){
+  .calc .box{grid-template-columns:1fr}
+  .day{grid-template-columns:1fr}
+}
+
+/* ─── ночь: полоса на всю ширину ─── */
+.nightband{position:relative;isolation:isolate;margin-top:clamp(96px,12vw,170px);padding:clamp(72px,10vw,150px) 0;overflow:hidden}
+.nightband > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;z-index:-2;filter:brightness(.42) saturate(.9)}
+.nightband::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,4,26,.92) 0,rgba(7,4,26,.55) 55%,rgba(7,4,26,.2) 100%)}
+.nightband .times{display:flex;flex-wrap:wrap;align-items:center;gap:0 .3em;font:900 clamp(64px,13vw,210px)/.9 var(--display);letter-spacing:-.05em}
+.nightband .times .to{color:transparent;-webkit-text-stroke:2px var(--ink);font-weight:300}
+.nightband .grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px 48px;align-items:end;margin-top:28px}
+.nightband p{font-size:clamp(17px,1.6vw,20px);max-width:52ch}
+.nightband .pr{display:flex;gap:32px;flex-wrap:wrap}
+.nightband .pr div{display:grid;gap:4px}
+.nightband .pr b{font:900 clamp(30px,3.4vw,46px)/1 var(--display);letter-spacing:-.03em}
+.nightband .pr span{font-size:14px;color:var(--ink-2)}
+@media (max-width:760px){.nightband .grid{grid-template-columns:1fr}}
+
+/* ─── акции: список строк ─── */
+.promo{padding-block:clamp(96px,12vw,170px) 0}
+.plist{margin:40px 0 0;padding:0;list-style:none;border-top:2px solid var(--ink)}
+.plist li{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) minmax(0,.8fr);gap:12px 40px;align-items:baseline;padding:clamp(20px,2.6vw,34px) 0;border-bottom:1px solid var(--line)}
+.plist li::before{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--sky);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.plist li:hover::before{transform:scaleX(1)}
+.plist .k{font:900 clamp(40px,5.6vw,84px)/.9 var(--display);letter-spacing:-.04em;transition:color .25s}
+.plist li:hover .k{color:var(--sky)}
+.plist .k{white-space:nowrap}
+.plist .k small{font-size:.38em;letter-spacing:0;font-weight:700;margin-right:.25em}
+.plist h3{font-size:clamp(18px,1.8vw,24px);font-weight:700;margin-bottom:8px;text-transform:none;letter-spacing:-.01em}
+.plist p{color:var(--ink-2)}
+.plist .c{font-size:14px;color:var(--ink-3);display:grid;gap:4px;align-self:start;padding-top:.4em}
+.plist .c b{color:var(--ink-2);font-weight:500}
+.plist .c a{color:var(--sky)}
+.plist .c .when{color:var(--sky);font-weight:600}
+/* вторая группа — бонусы: те же строки, плотнее, цифра меньше */
+.pgrp{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 32px;margin-top:clamp(56px,7vw,88px)}
+.pgrp h3{font-size:clamp(20px,2.2vw,28px);font-weight:900;text-transform:uppercase}
+.pgrp p{color:var(--ink-2);font-size:16px;max-width:52ch}
+.pgrp p a{color:var(--sky)}
+.plist.sm{margin-top:20px}
+.plist.sm li{padding:clamp(16px,2vw,24px) 0}
+.plist.sm .k{font-size:clamp(30px,3.6vw,52px)}
+.plist.sm h3{font-size:clamp(17px,1.6vw,21px);margin-bottom:6px}
+.plist.sm p{font-size:16px}
+@media (max-width:820px){.plist li{grid-template-columns:1fr;gap:8px}.plist .c{padding-top:0;display:flex;flex-wrap:wrap;gap:4px 16px}}
+
+/* ─── компании ─── */
+.crew{padding-block:clamp(96px,12vw,170px) 0}
+.crew .pair{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:12px;margin-top:40px}
+.room-c{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;min-height:560px;padding:clamp(20px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.room-c > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.room-c::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,4,26,.2) 0,rgba(7,4,26,.2) 40%,rgba(7,4,26,.94) 100%)}
+.room-c .cap{display:flex;align-items:flex-start;gap:14px}
+.room-c .cap b{font:900 clamp(110px,14vw,200px)/.78 var(--display);letter-spacing:-.06em}
+.room-c .cap span{font:700 15px/1.25 var(--display);text-transform:uppercase;letter-spacing:.08em;padding-top:8px}
+.room-c h3{font-size:clamp(24px,2.6vw,36px);font-weight:900;text-transform:uppercase;margin-bottom:10px}
+.room-c p{color:var(--ink-2);max-width:44ch}
+.room-c .pp{font:700 20px var(--display);margin-top:14px}
+.room-c .pp small{font:400 15px var(--body);color:var(--ink-2)}
+.room-c.ps{display:grid;grid-template-rows:auto 1fr}
+@media (max-width:900px){.crew .pair{grid-template-columns:1fr}.room-c{min-height:480px}}
+
+/* ─── рейтинг ─── */
+.rate{margin-top:clamp(96px,12vw,170px);border-block:1px solid var(--line)}
+.rate .scores{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:20px clamp(32px,5vw,72px);padding-block:clamp(28px,4vw,56px)}
+.rate .score{display:flex;align-items:center;gap:18px;text-decoration:none}
+.rate .score .l{font:700 clamp(18px,1.8vw,24px)/1.2 var(--display);letter-spacing:-.01em}
+.rate .score .l small{display:block;font:500 15px var(--body);color:var(--sky);margin-top:6px;letter-spacing:0}
+.rate .scores .t{font:400 16px/1.5 var(--body);letter-spacing:0;color:var(--ink-2);justify-self:end;max-width:24ch;text-align:right}
+.rate .v{font:900 clamp(80px,10vw,168px)/.8 var(--display);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px var(--sky);transition:color .4s var(--ease)}
+.rate .score:hover .v,.rate .score:focus-visible .v{color:var(--sky)}
+.rate .t{font:700 clamp(20px,2.4vw,32px)/1.2 var(--display);letter-spacing:-.01em}
+.rate .t small{display:block;font:400 16px var(--body);color:var(--ink-2);margin-top:10px;letter-spacing:0}
+.rate .go{font:700 15px var(--display);color:var(--sky);white-space:nowrap}
+@media (max-width:980px){.rate .scores{grid-template-columns:auto auto}.rate .scores .t{grid-column:1/-1;justify-self:start;text-align:left;max-width:none}}
+@media (max-width:560px){.rate .scores{grid-template-columns:1fr}.rate .score{gap:14px}}
+
+/* ─── вопросы ─── */
+.faq{padding-block:clamp(96px,12vw,170px) 0}
+.faq .grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px clamp(32px,5vw,80px);align-items:start}
+.faq .aside{display:grid;gap:22px;position:sticky;top:96px}
+.faq .h2{font-size:clamp(36px,4.6vw,64px)}
+.faq .aside .tels{display:grid;gap:12px;font-size:16px}
+.faq .aside .tels b{display:block;font:700 20px var(--display);letter-spacing:-.01em;user-select:all}
+.faq .aside .tels span{color:var(--ink-2);font-size:14px}
+.qa{border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;min-height:44px;font:700 clamp(17px,1.6vw,21px)/1.3 var(--display);letter-spacing:-.01em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"";flex:none;width:14px;height:14px;border-right:2px solid var(--sky);border-bottom:2px solid var(--sky);transform:rotate(45deg) translate(-3px,-3px);transition:transform .2s var(--ease)}
+.qa details[open] summary::after{transform:rotate(225deg) translate(-3px,-3px)}
+.qa summary:hover{color:var(--sky)}
+.qa details p{color:var(--ink-2);padding:0 0 22px;max-width:62ch}
+@media (max-width:900px){.faq .grid{grid-template-columns:1fr}.faq .aside{position:static}}
+
+/* ─── подвал ─── */
+.foot{margin-top:clamp(96px,12vw,170px);background:var(--indigo);padding-top:clamp(48px,6vw,80px);overflow:hidden}
+.foot .cols{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(2,minmax(0,1fr));gap:32px 48px}
+.foot h3{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);margin-bottom:12px;font-weight:700}
+.foot p{color:var(--ink-2);font-size:15px;margin-bottom:6px}
+.foot .tel{color:var(--ink);font-weight:600;user-select:all}
+.foot .cta{display:grid;gap:16px;align-content:start}
+.foot .cta p{font:700 clamp(22px,2.4vw,30px)/1.2 var(--display);color:var(--ink);letter-spacing:-.01em}
+.foot .links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:15px}
+.foot .links a{color:var(--ink-2)}
+.foot .allp{margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.foot .allp div{display:flex;flex-wrap:wrap;gap:10px}
+.foot .allp a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--night);color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .15s}
+.foot .allp a:hover{box-shadow:inset 0 0 0 1px var(--sky)}
+.foot .small{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
+.foot .giant{display:block;color:var(--night);margin-top:32px;margin-bottom:-4%;padding-inline:var(--g)}
+.foot .giant svg{display:block;width:100%;height:auto}
+@media (max-width:860px){.foot .cols{grid-template-columns:1fr}}
+
+/* ─── липкая панель на телефоне ─── */
+.dock{display:none}
+@media (max-width:760px){
+  .dock{display:grid;grid-template-columns:1.3fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,4,26,.96);border-top:1px solid var(--line)}
+  .dock .btn{justify-content:center;min-height:50px;padding:0 12px}
+  .dock .sheet{position:absolute;left:12px;right:12px;bottom:calc(100% + 8px);display:grid;gap:8px;padding:12px;border-radius:18px;background:var(--indigo-2);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+  .dock .sheet a{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-radius:12px;background:var(--indigo);text-decoration:none;font-weight:600}
+  .dock .sheet a span{color:var(--ink-2);font-weight:400;font-size:14px}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+}
+
+
+/* ─── НАГРИНД: единственное место, где живёт лайм ───
+   Сначала выгода (1 бонус = 1 ₽, до половины игры), потом расчёт недели реальными правилами,
+   потом где копятся бонусы и настоящие экраны приложения. */
+.nag{--gain:#C9F24D;--nl:#26233F;margin-top:clamp(96px,12vw,170px);background:#0C0A1F;border-block:1px solid var(--nl);padding-block:clamp(72px,9vw,130px);overflow:hidden}
+.nag-k{color:var(--gain)}
+.nag .gain{color:var(--gain)}
+.nag .lead{margin-top:20px}
+.nag-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,80px);align-items:center}
+.nag-top > *,.nag-mid > *{min-width:0}
+.nag-eq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:36px 0 0;border-top:1px solid var(--nl)}
+.nag-eq div{padding:18px 18px 0 0;display:grid;gap:8px;align-content:start}
+.nag-eq div + div{padding-left:18px;border-left:1px solid var(--nl)}
+.nag-eq dt{font:900 clamp(26px,2.9vw,42px)/.95 var(--display);letter-spacing:-.04em;color:var(--gain);white-space:nowrap}
+.nag-eq dt.w{white-space:normal}
+.nag-eq dd{margin:0;font-size:15px;color:var(--ink-2)}
+.nag-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.gain-btn{--bg:var(--gain);color:#10140A}
+.gain-btn:hover{box-shadow:0 10px 30px -10px rgba(201,242,77,.6)}
+/* настоящие экраны приложения веером */
+.shots{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px}
+.shot{margin:0;width:clamp(180px,15vw,230px);flex:none;border-radius:30px;padding:7px;background:#1B1834;box-shadow:0 0 0 1px #34305A,0 40px 80px -30px rgba(0,0,0,.85);transition:transform .45s var(--ease)}
+.shot img{width:100%;aspect-ratio:600/1298;object-fit:cover;object-position:top;border-radius:24px}
+.shot:nth-child(1){transform:translateX(34%) rotate(-7deg) scale(.9)}
+.shot:nth-child(2){position:relative;z-index:2}
+.shot:nth-child(3){transform:translateX(-34%) rotate(7deg) scale(.9)}
+.shots:hover .shot:nth-child(1){transform:translateX(18%) rotate(-9deg) scale(.9)}
+.shots:hover .shot:nth-child(3){transform:translateX(-18%) rotate(9deg) scale(.9)}
+.shots-cap{margin-top:14px;font-size:13px;color:var(--ink-3);text-align:center}
+/* неделя в цифрах: чек */
+.nag-mid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);margin-top:clamp(64px,8vw,110px);align-items:start}
+.week{border-radius:24px;background:#141129;box-shadow:inset 0 0 0 1px var(--nl);padding:clamp(22px,2.6vw,34px)}
+.week h3,.earn > h3{font-size:clamp(20px,2vw,26px);font-weight:900;text-transform:uppercase}
+.week .sub{color:var(--ink-2);font-size:15px;margin-top:8px}
+.week ul{list-style:none;margin:20px 0 0;padding:0}
+.week li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--nl);font-size:16px}
+.week li b{font:700 17px var(--display);color:var(--gain);white-space:nowrap}
+.week .sum{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:16px}
+.week .sum span{font:700 16px var(--display);text-transform:uppercase;letter-spacing:.06em}
+.week .sum b{font:900 clamp(40px,4.4vw,60px)/1 var(--display);letter-spacing:-.04em;color:var(--gain)}
+.week .pay{margin-top:18px;padding:16px 18px;border-radius:16px;background:rgba(201,242,77,.08);box-shadow:inset 0 0 0 1px rgba(201,242,77,.35);display:grid;gap:4px}
+.week .pay p{font-size:15px;color:var(--ink-2)}
+.week .pay strong{font:900 clamp(22px,2.2vw,30px)/1.1 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.week .pay s{color:var(--ink-3);font-weight:500;margin-right:.3em}
+.week .note{margin-top:14px;font-size:14px;color:var(--ink-3)}
+/* где копятся бонусы: строки «механика — условие — сколько» */
+.earn ul{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--nl)}
+.earn li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;padding:16px 0;border-bottom:1px solid var(--nl)}
+.earn li h4{margin:0;font:700 17px/1.3 var(--display);letter-spacing:-.01em}
+.earn li p{color:var(--ink-2);font-size:15px;grid-column:1}
+.earn li b{grid-row:1/3;grid-column:2;align-self:center;font:900 clamp(18px,1.8vw,24px)/1 var(--display);color:var(--gain);text-align:right;white-space:nowrap;letter-spacing:-.02em}
+.nag-steps{list-style:none;counter-reset:st;margin:clamp(56px,7vw,96px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--nl)}
+.nag-steps li{counter-increment:st;display:grid;gap:8px;align-content:start;padding:20px 24px 0 0;color:var(--ink-2)}
+.nag-steps li + li{padding-left:24px;border-left:1px solid var(--nl)}
+.nag-steps li::before{content:counter(st);font:900 36px/1 var(--display);color:var(--gain)}
+.nag-steps b{color:var(--ink);font-weight:600}
+.nag-bottom{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+@media (max-width:980px){
+  .nag-top,.nag-mid{grid-template-columns:1fr}
+  .shots{min-height:0;justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:4px 2px 12px;margin-inline:calc(var(--g) * -1);padding-inline:var(--g);scrollbar-width:none}
+  .shots::-webkit-scrollbar{display:none}
+  .shot,.shots:hover .shot{transform:none!important;scroll-snap-align:start;width:min(62vw,240px)}
+  .shots-cap{text-align:left}
+}
+@media (max-width:640px){
+  .nag-eq{grid-template-columns:1fr}
+  .nag-eq div,.nag-eq div + div{padding:14px 0;border-left:0;border-bottom:1px solid var(--nl);grid-template-columns:auto 1fr;align-items:baseline;gap:14px}
+  .nag-eq dt{min-width:4.6em}
+  .nag-steps{grid-template-columns:1fr}
+  .nag-steps li,.nag-steps li + li{padding:16px 0;border-left:0;border-bottom:1px solid var(--nl);grid-template-columns:40px 1fr}
+  .nag-steps li::before{font-size:26px}
+  .earn li{grid-template-columns:1fr}
+  .earn li b{grid-row:auto;grid-column:1;text-align:left;margin-top:4px}
+}
+
+/* ─── отзывы лентой ─── */
+.rv-wrap{padding-block:8px clamp(28px,4vw,56px)}
+.rv-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}
+.rv-bar .kick{margin-bottom:8px}
+.rv-nav{display:flex;gap:8px}
+.rv-b{width:48px;height:48px;border-radius:50%;border:0;background:var(--indigo);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.rv-b:hover{background:var(--indigo-2)}
+.rv-track{display:flex;align-items:flex-start;gap:14px;overflow-x:auto;padding:4px var(--g) 16px;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
+.rv-track::-webkit-scrollbar{display:none}
+.rv{flex:0 0 min(420px,82vw);background:var(--indigo);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.rv .st{color:var(--sky);letter-spacing:.15em;font-size:15px}
+.rv q{quotes:none;font-size:16px;line-height:1.6;color:var(--ink);white-space:pre-line;overflow-wrap:anywhere}
+.rv .who a{white-space:nowrap}
+.rv-bar .kick a{color:inherit;text-underline-offset:3px}
+.rv-other{font-size:15px;color:var(--ink-2)}
+.rv-other a{color:var(--sky)}
+.rv .who{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:14px;color:var(--ink-2)}
+.rv .who b{color:var(--ink);font-weight:600}
+.rv.ph{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);border:0}
+.rv.ph .lines{display:grid;gap:10px}
+.rv.ph .lines i{display:block;height:10px;border-radius:5px;background:var(--indigo-2)}
+.rv.ph p{font-size:14px;color:var(--ink-2)}
+.calc-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 32px}
+
+/* ─── как нас найти: у каждого клуба своя крупная карта 2ГИС с номерами домов и маркером ровно на входе ─── */
+.find{padding-block:clamp(96px,12vw,170px) 0}
+.fclubs{display:grid;gap:clamp(16px,2vw,24px);margin-top:40px}
+.fclub{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);grid-template-areas:"map photo" "in in";border-radius:28px;overflow:hidden;background:var(--indigo);box-shadow:inset 0 0 0 1px var(--line)}
+.fmap{grid-area:map;position:relative;margin:0;aspect-ratio:11/7;background:#EDE8DB;overflow:hidden}
+.fmap > img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.fphoto{grid-area:photo;width:100%;height:100%;object-fit:cover}
+/* маркер: остриё — ровно в точке входа по 2ГИС (центр карты) */
+.mark{position:absolute;left:50%;top:50%;width:0;height:0}
+.mark::before{content:"";position:absolute;left:-28px;top:-28px;width:56px;height:56px;border-radius:50%;background:rgba(60,110,255,.28);animation:ping 1.8s var(--ease) infinite}
+.mark svg{position:absolute;left:-22px;top:-58px;width:44px;height:58px;filter:drop-shadow(0 6px 10px rgba(7,4,26,.45))}
+.mark b{position:absolute;left:0;top:-104px;transform:translateX(-50%);white-space:nowrap;font:900 15px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--night);padding:10px 14px;border-radius:12px;box-shadow:0 8px 24px rgba(7,4,26,.35)}
+.mark b::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--night);transform:translateX(-50%) rotate(45deg)}
+@keyframes ping{0%{transform:scale(.4);opacity:1}80%,100%{transform:scale(1.6);opacity:0}}
+.fclub .in{grid-area:in;padding:clamp(20px,2.6vw,34px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);grid-template-areas:"k k" "h h" "l t" "l a";gap:14px 40px;align-content:start}
+.fclub .dist-k{grid-area:k;font:700 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+.fclub h3{grid-area:h;font-size:clamp(24px,2.6vw,36px);font-weight:900;text-transform:uppercase}
+.fclub ul{grid-area:l;align-content:start;list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:16px;color:var(--ink-2)}
+.fclub li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.fclub li svg{width:18px;height:18px;margin-top:3px;fill:none;stroke:var(--sky);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fclub li b{color:var(--ink);font-weight:600}
+.fclub .tel{grid-area:t;align-self:start;white-space:nowrap;font:700 20px var(--display);letter-spacing:-.01em;user-select:all}
+.fclub .acts{grid-area:a;align-self:start;display:flex;flex-direction:column;gap:8px}
+.fclub .acts .btn{justify-content:center}
+.find .note{margin-top:16px;font-size:15px;color:var(--ink-2)}
+.find .note a{color:var(--sky)}
+@media (max-width:900px){
+  .fclub{grid-template-columns:1fr;grid-template-areas:"map" "photo" "in"}
+  .fphoto{aspect-ratio:16/9;height:auto}
+  .fclub .in{grid-template-columns:1fr;grid-template-areas:"k" "h" "l" "t" "a"}
+  .fclub .acts{flex-direction:row;flex-wrap:wrap}
+  .fmap{aspect-ratio:4/3}
+}
+@media (max-width:420px){.mark b{font-size:13px;padding:8px 11px;top:-96px}}
+
+/* появление при прокрутке: один раз, со сдвигом 16 px; всё, что видно при загрузке, не прячем */
+.pre{opacity:0;transform:translateY(16px)}
+.show{opacity:1;transform:none;transition:opacity .4s var(--ease),transform .4s var(--ease)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .pre{opacity:1;transform:none}
+  .ribbon .track{flex-wrap:wrap;width:auto}
+  .ribbon ul[aria-hidden]{display:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 2400 1064"><g transform="translate(0.000000,1064.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M13885 10630 c-11 -5 -40 -9 -65 -9 -44 -1 -239 -33 -309 -50 -20 -5 -61 -15 -91 -21 -75 -17 -244 -70 -335 -105 -22 -9 -49 -19 -60 -22 -52 -17 -291 -146 -385 -208 -511 -338 -795 -867 -795 -1485 l0 -165 875 0 875 0 8 54 c25 181 161 303 407 367 85 23 376 26 465 5 126 -29 272 -117 352 -211 31 -37 93 -135 93 -148 0 -4 6 -19 14 -33 55 -106 61 -342 13 -482 -72 -206 -226 -352 -447 -420 -58 -18 -99 -21 -400 -24 -294 -4 -337 -6 -347 -21 -10 -12 -13 -186 -13 -792 0 -606 3 -780 13 -792 10 -14 58 -17 372 -21 377 -5 405 -8 555 -60 230 -78 391 -214 502 -423 123 -232 124 -535 2 -777 -102 -200 -285 -356 -504 -428 -155 -50 -177 -53 -390 -53 -211 0 -217 0 -366 49 -234 77 -446 278 -532 505 -41 110 -55 175 -80 370 l-7 55 -860 0 -860 0 -3 -110 c-6 -199 42 -557 104 -785 20 -73 73 -240 83 -265 5 -11 26 -60 46 -109 36 -87 70 -154 114 -226 11 -19 24 -42 28 -50 16 -37 130 -195 203 -282 147 -177 403 -387 585 -480 376 -193 575 -254 1070 -329 110 -17 713 -24 856 -10 199 19 303 31 354 40 28 6 91 17 140 27 940 173 1648 701 1935 1444 18 47 36 94 41 105 8 20 27 87 53 185 113 427 95 986 -46 1415 -34 104 -34 103 -87 215 -102 212 -219 371 -392 534 -128 121 -367 292 -470 338 -47 21 -47 22 85 142 329 302 544 837 540 1346 -3 263 -68 602 -154 795 -175 392 -340 616 -635 863 -141 119 -391 270 -560 339 -226 93 -494 164 -730 195 -108 14 -831 21 -860 8z"/> <path d="M22 10498 c-19 -19 -17 -7701 2 -7717 11 -9 464 -11 1873 -8 1822 4 1861 4 1988 24 213 34 307 54 470 98 79 21 251 81 300 104 11 6 43 20 70 32 521 227 956 637 1194 1125 137 281 188 440 242 759 28 163 31 555 5 720 -31 195 -74 371 -121 495 -149 390 -298 624 -569 896 -185 184 -294 270 -497 387 -98 56 -279 147 -295 147 -5 1 -27 9 -49 20 -22 11 -46 19 -53 20 -7 0 -20 4 -30 9 -21 11 -87 34 -167 56 -33 10 -80 23 -105 30 -25 8 -81 21 -125 29 -44 9 -105 20 -135 26 -207 42 -403 50 -1221 50 -626 0 -798 3 -805 13 -5 6 -7 215 -4 467 l5 455 1785 5 1785 5 3 869 c1 634 -1 872 -9 882 -16 19 -5518 21 -5537 2z m3628 -4476 c110 -35 134 -46 205 -87 312 -181 438 -561 307 -925 -77 -214 -267 -372 -542 -451 -53 -15 -1607 -26 -1622 -11 -10 10 -11 1479 -2 1494 4 6 313 8 797 5 773 -4 794 -4 857 -25z"/> <path d="M8191 8046 c-12 -18 -21 -36 -21 -39 0 -4 -21 -50 -46 -104 -25 -54 -82 -177 -126 -273 -44 -96 -102 -222 -129 -278 -27 -57 -49 -105 -49 -107 0 -2 -17 -41 -39 -87 -21 -46 -49 -105 -61 -133 -12 -27 -45 -97 -72 -155 -27 -58 -59 -125 -70 -150 -11 -25 -33 -72 -48 -105 -15 -33 -39 -85 -53 -115 -37 -81 -85 -186 -122 -265 -49 -106 -85 -184 -112 -245 -14 -30 -42 -91 -63 -135 -21 -44 -49 -105 -63 -135 -13 -30 -39 -86 -57 -125 -18 -38 -71 -153 -117 -255 -47 -102 -104 -225 -128 -275 -23 -49 -49 -106 -58 -125 -31 -71 -70 -157 -103 -227 -19 -40 -49 -106 -68 -145 -19 -40 -46 -100 -61 -133 -32 -71 -60 -132 -168 -365 -90 -193 -117 -251 -117 -255 0 -1 -27 -60 -60 -129 -33 -70 -60 -128 -60 -130 0 -2 -21 -48 -46 -102 -130 -277 -184 -394 -184 -399 0 -1 -24 -54 -54 -116 -66 -142 -96 -207 -176 -384 -10 -22 -44 -93 -74 -158 -31 -65 -56 -119 -56 -121 0 -2 -22 -50 -49 -107 -26 -57 -60 -129 -73 -159 -69 -150 -128 -277 -189 -408 -22 -45 -39 -84 -39 -86 0 -2 -24 -55 -54 -117 -50 -107 -68 -146 -132 -286 -43 -93 -84 -182 -125 -271 -22 -46 -39 -85 -39 -88 0 -2 -22 -51 -50 -108 l-50 -104 0 -145 c0 -123 2 -146 16 -151 29 -11 1884 -7 1904 4 11 6 31 35 45 65 14 30 37 81 51 112 15 32 50 108 79 168 29 61 62 133 75 160 39 87 96 210 178 385 9 19 25 45 36 57 l19 23 1509 0 1508 0 25 -40 c14 -22 25 -43 25 -46 0 -4 18 -43 39 -88 72 -149 120 -252 208 -446 65 -142 135 -288 152 -320 l19 -35 952 -3 c696 -1 956 1 966 9 11 9 14 45 14 145 0 131 -1 135 -34 206 -18 40 -48 103 -65 141 -17 37 -44 95 -60 130 -16 34 -43 92 -60 130 -17 37 -44 96 -61 132 -16 36 -44 95 -61 133 -17 37 -43 92 -56 122 -14 30 -50 106 -79 169 -30 62 -54 115 -54 117 0 2 -27 60 -60 130 -33 69 -60 128 -60 130 0 2 -24 54 -54 116 -29 62 -63 133 -74 158 -11 25 -39 86 -62 135 -23 50 -51 110 -62 135 -22 50 -63 138 -113 245 -101 218 -145 313 -175 380 -13 28 -46 100 -75 160 -29 61 -63 133 -75 160 -42 95 -72 160 -105 230 -18 39 -48 102 -65 140 -18 39 -45 97 -60 130 -15 33 -42 90 -59 128 -17 37 -44 96 -61 132 -16 36 -44 95 -61 133 -17 37 -46 99 -64 137 -18 39 -44 95 -58 125 -53 117 -91 198 -127 275 -45 95 -99 211 -130 280 -12 28 -35 77 -50 110 -15 33 -42 92 -60 130 -17 39 -49 106 -70 150 -21 44 -49 105 -63 135 -13 30 -39 87 -57 125 -18 39 -43 93 -55 120 -13 28 -46 99 -74 158 -28 60 -51 110 -51 112 0 2 -24 54 -54 116 -29 63 -64 139 -78 169 -65 141 -90 195 -117 253 -16 34 -43 92 -60 130 -17 37 -44 96 -61 132 -16 36 -43 93 -59 128 -16 34 -45 98 -66 142 -20 44 -62 134 -92 200 -30 66 -77 167 -104 223 -27 57 -49 106 -49 108 0 2 -27 60 -60 129 -33 69 -60 129 -60 134 0 4 -8 15 -18 24 -17 15 -62 17 -434 17 l-416 0 -21 -34z m463 -3168 c10 -24 28 -65 41 -93 12 -27 42 -95 65 -149 23 -54 45 -106 50 -115 23 -46 70 -151 70 -157 0 -4 11 -30 24 -58 13 -28 33 -73 45 -101 27 -62 32 -73 70 -157 17 -37 39 -88 50 -115 10 -26 35 -82 54 -123 19 -41 53 -120 77 -174 23 -54 46 -107 51 -118 5 -10 13 -26 18 -36 5 -10 35 -79 66 -153 62 -146 75 -174 129 -293 20 -43 39 -89 42 -102 l6 -24 -871 0 c-866 0 -871 0 -871 20 0 11 4 28 10 38 5 9 17 35 26 57 9 22 25 60 36 85 11 25 24 54 28 65 5 11 19 45 33 75 14 30 55 127 92 215 37 88 75 178 85 200 9 22 111 258 225 525 114 267 218 508 231 537 13 28 24 54 24 56 0 15 61 137 68 137 4 0 16 -19 26 -42z"/> <path d="M19638 7815 c-10 -13 -18 -27 -18 -31 0 -4 -11 -30 -24 -58 -13 -28 -37 -80 -54 -116 -16 -36 -44 -96 -62 -135 -66 -143 -88 -191 -110 -240 -12 -27 -42 -90 -65 -140 -24 -49 -93 -200 -155 -335 -161 -352 -167 -364 -221 -478 -27 -56 -49 -105 -49 -108 0 -2 -18 -44 -41 -92 -93 -197 -108 -230 -134 -287 -15 -33 -40 -87 -55 -120 -28 -59 -56 -122 -100 -220 -12 -27 -47 -101 -76 -163 -30 -62 -54 -114 -54 -116 0 -2 -27 -61 -60 -130 -33 -70 -60 -128 -60 -130 0 -3 -20 -47 -44 -98 -24 -51 -55 -118 -69 -148 -13 -30 -42 -91 -62 -135 -43 -93 -91 -194 -130 -280 -29 -63 -65 -142 -116 -252 -17 -38 -42 -92 -55 -121 -13 -28 -35 -77 -49 -107 -44 -98 -77 -168 -131 -284 -30 -62 -54 -114 -54 -116 0 -2 -23 -52 -51 -112 -28 -59 -61 -130 -74 -158 -47 -104 -84 -182 -113 -245 -16 -36 -52 -114 -80 -175 -28 -60 -70 -153 -95 -205 -24 -52 -53 -115 -65 -140 -11 -25 -39 -85 -62 -135 -23 -49 -49 -106 -57 -125 -9 -19 -30 -66 -48 -105 -18 -38 -48 -101 -65 -140 -45 -98 -87 -188 -125 -270 -18 -38 -42 -92 -55 -120 -12 -27 -35 -78 -51 -112 -16 -35 -43 -93 -60 -130 -17 -38 -49 -105 -70 -151 -22 -46 -39 -85 -39 -87 0 -1 -24 -54 -54 -116 -57 -121 -99 -213 -136 -294 -13 -27 -43 -93 -69 -145 l-45 -95 -4 -137 c-2 -88 0 -144 8 -157 l11 -21 948 0 c890 0 949 1 964 18 8 9 33 55 55 102 22 47 56 121 77 165 61 129 115 247 137 295 11 25 43 92 71 150 27 58 62 132 77 165 15 34 34 66 42 73 12 9 352 12 1527 10 l1512 -3 19 -35 c11 -19 39 -78 64 -130 24 -52 64 -139 90 -193 25 -54 46 -100 46 -102 0 -1 24 -54 54 -116 77 -163 126 -269 143 -309 9 -19 24 -47 35 -62 l19 -28 953 0 953 0 11 25 c7 15 12 75 12 139 0 126 11 91 -111 354 -16 34 -42 91 -59 127 -16 36 -43 94 -60 130 -16 36 -43 94 -60 130 -16 36 -44 95 -61 133 -17 37 -44 95 -60 130 -16 34 -43 92 -60 130 -17 37 -50 108 -74 157 -23 50 -52 113 -65 140 -12 28 -39 86 -60 130 -21 44 -48 103 -60 130 -24 53 -61 134 -115 250 -101 218 -140 303 -178 386 -14 30 -44 96 -67 145 -23 49 -54 116 -70 149 -15 33 -39 85 -53 115 -26 58 -66 145 -123 268 -72 153 -102 219 -124 267 -12 28 -38 84 -57 125 -20 41 -47 100 -60 130 -14 30 -40 87 -58 125 -90 194 -115 248 -180 390 -13 28 -46 99 -74 158 -28 60 -51 110 -51 112 0 2 -24 54 -54 116 -29 63 -64 139 -78 169 -14 30 -41 89 -61 130 -68 148 -95 206 -121 263 -55 121 -81 176 -132 285 -30 63 -54 115 -54 117 0 2 -23 52 -51 112 -83 177 -127 272 -222 478 -30 66 -72 156 -92 200 -41 88 -83 180 -122 265 -14 30 -50 106 -79 169 -30 62 -54 115 -54 117 0 2 -27 60 -60 130 -33 69 -60 128 -60 129 0 2 -23 53 -51 112 -28 59 -63 133 -76 163 -14 30 -39 84 -56 120 -16 36 -47 103 -68 150 -21 47 -45 96 -52 110 l-13 25 -424 2 -425 3 -17 -25z m452 -3149 c0 -13 18 -56 86 -203 13 -28 24 -54 24 -56 0 -3 16 -40 36 -84 37 -82 40 -87 75 -168 12 -27 32 -73 45 -101 13 -28 24 -54 24 -57 0 -7 53 -127 70 -158 4 -9 27 -61 50 -115 23 -54 53 -121 65 -149 54 -115 85 -185 85 -189 0 -3 14 -35 31 -73 16 -37 34 -77 39 -88 5 -11 20 -45 33 -75 14 -30 43 -100 67 -154 23 -54 46 -106 50 -115 26 -49 72 -157 77 -182 l6 -29 -872 0 c-691 0 -871 3 -871 13 0 10 272 656 329 782 10 22 28 65 41 95 12 30 26 59 31 65 5 5 9 15 9 21 0 7 14 43 31 81 40 90 44 100 69 158 12 28 25 59 30 70 5 11 18 43 30 70 25 58 29 68 69 158 17 38 31 71 31 74 0 2 14 34 30 70 17 35 30 70 30 77 0 6 4 16 9 22 5 5 32 64 61 132 31 72 58 122 66 122 8 0 14 -6 14 -14z"/> </g></symbol><symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol><symbol id="i-vk" viewBox="0 0 24 24"><path fill="currentColor" d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z"/></symbol></svg>
+
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top" id="top">
+  <div class="bar">
+    <a href="#main" class="logo" aria-label="БАЗА, на главную"><svg viewBox="0 0 2400 1064" role="img" aria-label="БАЗА"><use href="#logo"/></svg></a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#clubs">Клубы</a><a href="#zones">Зоны</a><a href="ceny.html">Цены</a><a href="#promo">Акции</a><a href="nagrind.html">НАГРИНД</a><a href="novosti.html">Новости</a><a href="faq.html">Вопросы</a><a class="nav-app" href="https://baza.nagrind.ru/join" target="_blank" rel="noopener">Мой НАГРИНД <span aria-hidden="true">→</span></a>
+    </nav>
+    <div class="soc"><a href="https://t.me/base_51" target="_blank" rel="noopener" aria-label="БАЗА в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a><a href="https://vk.ru/baza_murmansk51" target="_blank" rel="noopener" aria-label="БАЗА во ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+    <a class="btn ghost my-app" href="https://baza.nagrind.ru/join" target="_blank" rel="noopener">Мой НАГРИНД</a>
+    <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать <span class="ar" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="h1">
+    <div class="ph" aria-hidden="true">
+      <img class="off" src="img/hero.jpg" alt="" width="1280" height="853">
+      <div class="on"><img src="img/hero.jpg" alt="" width="1280" height="853" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%"></div>
+    </div>
+    <div class="bmark" aria-hidden="true"><span>Б</span><span>А</span><span>З</span><span>А</span></div>
+    <div class="in">
+      <h1 id="h1"><span class="k">Компьютерный клуб</span><span class="word" aria-label="БАЗА"><span aria-hidden="true">Б</span><span aria-hidden="true">А</span><span aria-hidden="true">З</span><span aria-hidden="true">А</span></span><span class="c">в Мурманске · два зала · 24/7</span></h1>
+      <div class="row">
+        <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать <span class="ar" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#clubs">Выбрать клуб</a>
+        <p class="now" id="now"><span class="dot" aria-hidden="true"></span><span id="now-t">Круглосуточно, без выходных</span></p>
+      </div>
+      <div class="stats">
+        <div><b class="num">51</b><span>ПК в двух залах</span></div>
+        <div><b class="num">от 95 ₽</b><span>час в Стандарте</span></div>
+        <div><b>24/7</b><span>без перерывов</span></div>
+        <a href="https://yandex.ru/maps/org/baza/23967097444/reviews/" target="_blank" rel="noopener"><b class="num">5,0</b><span>на Яндекс Картах и в 2ГИС</span></a>
+      </div>
+    </div>
+    <button class="skipfx" type="button" id="skipfx">Пропустить анимацию</button>
+  </section>
+
+  <div class="rib-wrap"><div class="ribbon" id="ribbon">
+    <div class="track">
+      <ul><li>Ночь 22:00–10:00</li><li>Днём 95 ₽ / час</li><li>RTX 4070 в Solo</li><li>240 Гц в Bootcamp</li><li>2 TV-комнаты с PS5</li><li>Проекторная с PS5 до 10 человек</li><li>−5 % за бронь в приложении</li><li>51 ПК</li></ul>
+      <ul aria-hidden="true"><li>Ночь 22:00–10:00</li><li>Днём 95 ₽ / час</li><li>RTX 4070 в Solo</li><li>240 Гц в Bootcamp</li><li>2 TV-комнаты с PS5</li><li>Проекторная с PS5 до 10 человек</li><li>−5 % за бронь в приложении</li><li>51 ПК</li></ul>
+    </div>
+    <button class="pause" type="button" aria-pressed="false" aria-label="Остановить бегущую строку">❚❚</button>
+  </div></div>
+
+  <!-- два клуба -->
+  <section class="clubs" id="clubs" aria-labelledby="clubs-h">
+    <div class="wrap head">
+      <div><p class="kick">Два клуба</p><h2 class="h2" id="clubs-h">Октябрьский <span class="lt">и</span>&nbsp;Ленинский</h2></div>
+      <p class="lead">Оба открыты круглосуточно. Выберите, какой ближе: маршрут, телефон и схема зала — в карточке клуба.</p>
+    </div>
+    <div class="panels">
+      <article class="panel" aria-labelledby="km-h">
+        <img src="img/km-hall.jpg" alt="Зал на Карла Маркса: ряды ПК, кресла Zone 51, мурал с астронавтом" width="1280" height="853" loading="lazy">
+        <div class="pc"><b class="num">22</b><span>ПК<small>Стандарт 16 · Bootcamp 6</small></span></div>
+        <div class="body">
+          <h3 id="km-h">Карла Маркса, 38</h3>
+          <ul class="zl"><li>Стандарт</li><li class="v">Bootcamp · VIP</li><li>Бар</li><li>24/7</li><li>от 95 ₽/час</li></ul>
+          <div class="meta"><span>Октябрьский округ</span><span>Вход с улицы, лестница вниз</span><span class="tel num">+7 900 938-24-48</span></div>
+          <div class="acts">
+            <a class="btn sm" href="https://yandex.ru/maps/org/baza/23967097444/" target="_blank" rel="noopener">Маршрут <span class="ar" aria-hidden="true">→</span></a>
+            <a class="btn sm ghost" href="#map" data-club="km">Схема зала</a>
+            <a class="btn sm ghost" href="klub-km.html">О клубе</a>
+          </div>
+        </div>
+      </article>
+      <article class="panel" aria-labelledby="gs-h">
+        <img src="img/gs-hall.jpg" alt="Зал на Героев-Североморцев: ряды ПК и мурал с астронавтом" width="1280" height="853" loading="lazy">
+        <div class="pc"><b class="num">29</b><span>ПК<small>Стандарт 21 · Bootcamp 5 · Solo 3</small></span></div>
+        <div class="body">
+          <h3 id="gs-h">Героев-Североморцев, 62</h3>
+          <ul class="zl"><li>Стандарт</li><li class="v">Bootcamp · VIP</li><li class="s">Solo</li><li>2 TV с PS5</li><li>Проекторная</li><li>Кальян 18+</li><li>Бар</li><li>от 95 ₽/час</li></ul>
+          <div class="meta"><span>Ленинский округ</span><span>1 этаж</span><span class="tel num">+7 900 938-13-01</span></div>
+          <div class="acts">
+            <a class="btn sm" href="https://yandex.ru/maps/org/baza/44333217761/" target="_blank" rel="noopener">Маршрут <span class="ar" aria-hidden="true">→</span></a>
+            <a class="btn sm ghost" href="#map" data-club="gs">Схема зала</a>
+            <a class="btn sm ghost" href="klub-gs.html">О клубе</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- схема зала -->
+  <section class="map wrap" id="map" aria-labelledby="map-h">
+    <p class="kick">Схема зала</p>
+    <h2 class="h2" id="map-h">Выберите <span class="lt">место</span></h2>
+    <div class="grid">
+        <div class="seg" role="tablist" aria-label="Клуб">
+          <button role="tab" id="mt-km" aria-selected="true" aria-controls="mp-km" data-club="km">Карла Маркса</button>
+          <button role="tab" id="mt-gs" aria-selected="false" aria-controls="mp-gs" data-club="gs" tabindex="-1">Героев-Североморцев</button>
+        </div>
+        <ul class="legend" id="legend" aria-label="Подсветить зону"></ul>
+        <div class="card" id="seat-card" aria-live="polite"></div>
+      <div class="board" id="board">
+        <p class="hint">Схема листается вбок. Нажмите на место.</p>
+        <div id="mp-km" role="tabpanel" aria-labelledby="mt-km" class="scroll"><svg class="hall" viewBox="0 32 800 464" role="group" aria-labelledby="hall-t-km hall-d-km">
+<title id="hall-t-km">Схема зала БАЗА на Карла Маркса, 38</title>
+<desc id="hall-d-km">Вход с улицы слева: за дверью лестница вниз, внизу вторая дверь — в коридор: направо — общий зал Стандарт, налево — дверь в VIP. Общий зал: ряд мест 9–16 вдоль верхней стены и остров из двух рядов, 5–8 и 1–4, за общим столом. Ниже острова небольшая стойка администратора. VIP: шесть мест 17–22 вдоль правой стены комнаты.</desc>
+<defs><pattern id="dots-km" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".75" class="dot"/></pattern></defs>
+<rect x="0" y="32" width="800" height="464" fill="url(#dots-km)"/>
+<rect class="building" x="40" y="64" width="720" height="400"/>
+<g class="areas">
+<polygon class="area z-standard" data-area="hall" points="240,64 760,64 760,464 240,464"/>
+<polygon class="area z-vip" data-area="vip" points="40,128 96,128 96,176 240,176 240,464 40,464"/>
+<polygon class="area z-none" data-area="stairs" points="40,64 240,64 240,128 40,128"/>
+<polygon class="area z-none" data-area="corridor" points="96,128 240,128 240,176 96,176"/>
+</g>
+<g class="stairs" role="img" aria-label="Лестница вниз ко второй двери"><rect x="96" y="68" width="56" height="56"/><line x1="96" y1="68" x2="96" y2="124"/><line x1="104" y1="68" x2="104" y2="124"/><line x1="112" y1="68" x2="112" y2="124"/><line x1="120" y1="68" x2="120" y2="124"/><line x1="128" y1="68" x2="128" y2="124"/><line x1="136" y1="68" x2="136" y2="124"/><line x1="144" y1="68" x2="144" y2="124"/><line x1="152" y1="68" x2="152" y2="124"/><path class="dir" d="M100 96.0 H148 m-5 -5 l5 5 l-5 5"/></g>
+<path id="route-km" class="route" d=""/>
+<g class="walls">
+<line class="outer" x1="40" y1="64" x2="760" y2="64"/>
+<line class="outer" x1="760" y1="64" x2="760" y2="464"/>
+<line class="outer" x1="40" y1="464" x2="760" y2="464"/>
+<line class="outer" x1="40" y1="64" x2="40" y2="72"/>
+<line class="outer" x1="40" y1="120" x2="40" y2="464"/>
+<line x1="96" y1="128" x2="96" y2="132"/>
+<line x1="96" y1="172" x2="96" y2="176"/>
+<line x1="40" y1="128" x2="200" y2="128"/>
+<line x1="232" y1="128" x2="240" y2="128"/>
+<line x1="240" y1="64" x2="240" y2="128"/>
+<line x1="96" y1="176" x2="240" y2="176"/>
+<line x1="240" y1="176" x2="240" y2="464"/>
+</g>
+<g class="doors">
+<path class="door main" d="M40 72 H88 A48 48 0 0 1 40 120"/>
+<path class="door" d="M200 128 V160 A32 32 0 0 0 232 128"/>
+<path class="door" d="M96 132 H56 A40 40 0 0 0 96 172"/>
+</g>
+<g class="labels">
+<text class="zlabel" x="504" y="204">СТАНДАРТ</text>
+<text class="zlabel vip" x="64" y="216">VIP</text>
+</g>
+<g class="rooms">
+</g>
+<g class="desks">
+<rect x="248" y="68" width="496" height="14" rx="3"/>
+<rect x="504" y="256" width="240" height="28" rx="3"/>
+<rect x="222" y="196" width="14" height="260" rx="3"/>
+</g>
+<g class="seats">
+<g class="seat z-standard" data-zone="standard" data-seat="1" style="--i:12" aria-label="Место 1, Стандарт"><rect class="body" x="512" y="288" width="32" height="32" rx="7"/><rect class="mon" x="519" y="275" width="18" height="4" rx="2"/><text x="528" y="308" text-anchor="middle">1</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="2" style="--i:15" aria-label="Место 2, Стандарт"><rect class="body" x="576" y="288" width="32" height="32" rx="7"/><rect class="mon" x="583" y="275" width="18" height="4" rx="2"/><text x="592" y="308" text-anchor="middle">2</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="3" style="--i:18" aria-label="Место 3, Стандарт"><rect class="body" x="640" y="288" width="32" height="32" rx="7"/><rect class="mon" x="647" y="275" width="18" height="4" rx="2"/><text x="656" y="308" text-anchor="middle">3</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="4" style="--i:21" aria-label="Место 4, Стандарт"><rect class="body" x="704" y="288" width="32" height="32" rx="7"/><rect class="mon" x="711" y="275" width="18" height="4" rx="2"/><text x="720" y="308" text-anchor="middle">4</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="5" style="--i:11" aria-label="Место 5, Стандарт"><rect class="body" x="512" y="220" width="32" height="32" rx="7"/><rect class="mon" x="519" y="261" width="18" height="4" rx="2"/><text x="528" y="240" text-anchor="middle">5</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="6" style="--i:14" aria-label="Место 6, Стандарт"><rect class="body" x="576" y="220" width="32" height="32" rx="7"/><rect class="mon" x="583" y="261" width="18" height="4" rx="2"/><text x="592" y="240" text-anchor="middle">6</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="7" style="--i:17" aria-label="Место 7, Стандарт"><rect class="body" x="640" y="220" width="32" height="32" rx="7"/><rect class="mon" x="647" y="261" width="18" height="4" rx="2"/><text x="656" y="240" text-anchor="middle">7</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="8" style="--i:20" aria-label="Место 8, Стандарт"><rect class="body" x="704" y="220" width="32" height="32" rx="7"/><rect class="mon" x="711" y="261" width="18" height="4" rx="2"/><text x="720" y="240" text-anchor="middle">8</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="9" style="--i:6" aria-label="Место 9, Стандарт"><rect class="body" x="256" y="86" width="32" height="32" rx="7"/><rect class="mon" x="263" y="73" width="18" height="4" rx="2"/><text x="272" y="106" text-anchor="middle">9</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="10" style="--i:7" aria-label="Место 10, Стандарт"><rect class="body" x="320" y="86" width="32" height="32" rx="7"/><rect class="mon" x="327" y="73" width="18" height="4" rx="2"/><text x="336" y="106" text-anchor="middle">10</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="11" style="--i:8" aria-label="Место 11, Стандарт"><rect class="body" x="384" y="86" width="32" height="32" rx="7"/><rect class="mon" x="391" y="73" width="18" height="4" rx="2"/><text x="400" y="106" text-anchor="middle">11</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="12" style="--i:9" aria-label="Место 12, Стандарт"><rect class="body" x="448" y="86" width="32" height="32" rx="7"/><rect class="mon" x="455" y="73" width="18" height="4" rx="2"/><text x="464" y="106" text-anchor="middle">12</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="13" style="--i:10" aria-label="Место 13, Стандарт"><rect class="body" x="512" y="86" width="32" height="32" rx="7"/><rect class="mon" x="519" y="73" width="18" height="4" rx="2"/><text x="528" y="106" text-anchor="middle">13</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="14" style="--i:13" aria-label="Место 14, Стандарт"><rect class="body" x="576" y="86" width="32" height="32" rx="7"/><rect class="mon" x="583" y="73" width="18" height="4" rx="2"/><text x="592" y="106" text-anchor="middle">14</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="15" style="--i:16" aria-label="Место 15, Стандарт"><rect class="body" x="640" y="86" width="32" height="32" rx="7"/><rect class="mon" x="647" y="73" width="18" height="4" rx="2"/><text x="656" y="106" text-anchor="middle">15</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="16" style="--i:19" aria-label="Место 16, Стандарт"><rect class="body" x="704" y="86" width="32" height="32" rx="7"/><rect class="mon" x="711" y="73" width="18" height="4" rx="2"/><text x="720" y="106" text-anchor="middle">16</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="17" style="--i:0" aria-label="Место 17, VIP"><rect class="body" x="186" y="200" width="32" height="32" rx="7"/><rect class="mon" x="227" y="207" width="4" height="18" rx="2"/><text x="202" y="220" text-anchor="middle">17</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="18" style="--i:1" aria-label="Место 18, VIP"><rect class="body" x="186" y="244" width="32" height="32" rx="7"/><rect class="mon" x="227" y="251" width="4" height="18" rx="2"/><text x="202" y="264" text-anchor="middle">18</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="19" style="--i:2" aria-label="Место 19, VIP"><rect class="body" x="186" y="288" width="32" height="32" rx="7"/><rect class="mon" x="227" y="295" width="4" height="18" rx="2"/><text x="202" y="308" text-anchor="middle">19</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="20" style="--i:3" aria-label="Место 20, VIP"><rect class="body" x="186" y="332" width="32" height="32" rx="7"/><rect class="mon" x="227" y="339" width="4" height="18" rx="2"/><text x="202" y="352" text-anchor="middle">20</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="21" style="--i:4" aria-label="Место 21, VIP"><rect class="body" x="186" y="376" width="32" height="32" rx="7"/><rect class="mon" x="227" y="383" width="4" height="18" rx="2"/><text x="202" y="396" text-anchor="middle">21</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="22" style="--i:5" aria-label="Место 22, VIP"><rect class="body" x="186" y="420" width="32" height="32" rx="7"/><rect class="mon" x="227" y="427" width="4" height="18" rx="2"/><text x="202" y="440" text-anchor="middle">22</text></g>
+</g>
+<g class="counter" role="img" aria-label="Стойка администратора"><polygon class="zone" points="296,368 400,368 400,440 296,440"/><text class="zlabel" x="296" y="356">СТОЙКА · АДМИН</text><polygon class="top" points="304,376 392,376 392,432 368,432 368,400 304,400"/><rect class="mon" x="327" y="391" width="18" height="4" rx="2"/><rect class="chair" x="320" y="404" width="32" height="32" rx="7"/><g class="ico" transform="translate(328 411)"><circle cx="8" cy="5" r="3.6"/><path d="M1.5 17a6.5 6.5 0 0 1 13 0"/></g></g>
+<g class="entrance"><path d="M6 96 H32 m-6 -6 l6 6 l-6 6"/><text x="19" y="84" text-anchor="middle">Вход</text></g>
+</svg></div>
+        <div id="mp-gs" role="tabpanel" aria-labelledby="mt-gs" class="scroll" hidden><svg class="hall" viewBox="0 0 928 600" role="group" aria-labelledby="hall-t-gs hall-d-gs">
+<title id="hall-t-gs">Схема зала БАЗА на Героев-Североморцев, 62</title>
+<desc id="hall-d-gs">Слева комната с проектором и PS5: большой стол, два дивана, до 10 человек. Между ней и общим залом коридор из холла, из него двери в проекторную и в зал. Общий зал Стандарт: 21 место за столами в три ряда. Справа от зала комната Bootcamp VIP на пять мест (22–26) за столом вдоль стены, дверь в холл. Под залом три отдельные комнаты Solo со своими дверями. У правой стены WC и две комнаты с PS5. Стойка администратора в левом нижнем углу, вход в клуб справа внизу.</desc>
+<defs><pattern id="dots-gs" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".75" class="dot"/></pattern><linearGradient id="beam-gs" x1="0" x2="0" y1="0" y2="1"><stop offset="0" class="beam-a"/><stop offset="1" class="beam-b"/></linearGradient><clipPath id="clip-projector-gs"><polygon points="40,24 224,24 224,312 40,312"/></clipPath></defs>
+<rect x="0" y="0" width="928" height="600" fill="url(#dots-gs)"/>
+<rect class="building" x="40" y="24" width="848" height="512"/>
+<g class="areas">
+<polygon class="area z-projector" data-area="projector" points="40,24 224,24 224,312 40,312"/>
+<polygon class="area z-standard" data-area="hall" points="264,24 640,24 640,312 264,312"/>
+<polygon class="area z-vip" data-area="bootcamp" points="640,24 744,24 744,312 640,312"/>
+<polygon class="area z-solo" data-area="solo-1" points="296,312 400,312 400,408 296,408"/>
+<polygon class="area z-solo" data-area="solo-2" points="400,312 504,312 504,408 400,408"/>
+<polygon class="area z-solo" data-area="solo-3" points="504,312 608,312 608,408 504,408"/>
+<polygon class="area z-none" data-area="wc" points="784,24 888,24 888,120 784,120"/>
+<polygon class="area z-ps5" data-area="ps5-2" points="784,120 888,120 888,216 784,216"/>
+<polygon class="area z-ps5" data-area="ps5-1" points="784,216 888,216 888,312 784,312"/>
+</g>
+<polygon class="beam" clip-path="url(#clip-projector-gs)" fill="url(#beam-gs)" points="72,32 192,32 137,232 127,232"/>
+<path id="route-gs" class="route" d=""/>
+<g class="walls">
+<line class="outer" x1="40" y1="24" x2="888" y2="24"/>
+<line class="outer" x1="888" y1="24" x2="888" y2="536"/>
+<line class="outer" x1="784" y1="536" x2="888" y2="536"/>
+<line class="outer" x1="40" y1="536" x2="744" y2="536"/>
+<line class="outer" x1="40" y1="24" x2="40" y2="536"/>
+<line x1="224" y1="24" x2="224" y2="256"/>
+<line x1="224" y1="288" x2="224" y2="312"/>
+<line x1="40" y1="312" x2="224" y2="312"/>
+<line x1="264" y1="24" x2="264" y2="256"/>
+<line x1="264" y1="288" x2="264" y2="312"/>
+<line x1="264" y1="312" x2="640" y2="312"/>
+<line x1="640" y1="24" x2="640" y2="312"/>
+<line x1="744" y1="24" x2="744" y2="312"/>
+<line x1="640" y1="312" x2="656" y2="312"/>
+<line x1="688" y1="312" x2="744" y2="312"/>
+<line x1="296" y1="312" x2="296" y2="408"/>
+<line x1="400" y1="312" x2="400" y2="408"/>
+<line x1="504" y1="312" x2="504" y2="408"/>
+<line x1="608" y1="312" x2="608" y2="408"/>
+<line x1="296" y1="408" x2="334" y2="408"/>
+<line x1="362" y1="408" x2="438" y2="408"/>
+<line x1="466" y1="408" x2="542" y2="408"/>
+<line x1="570" y1="408" x2="608" y2="408"/>
+<line x1="784" y1="120" x2="888" y2="120"/>
+<line x1="784" y1="216" x2="888" y2="216"/>
+<line x1="784" y1="312" x2="888" y2="312"/>
+<line x1="784" y1="24" x2="784" y2="60"/>
+<line x1="784" y1="84" x2="784" y2="156"/>
+<line x1="784" y1="180" x2="784" y2="252"/>
+<line x1="784" y1="276" x2="784" y2="312"/>
+</g>
+<g class="doors">
+<path class="door" d="M224 256 H192 A32 32 0 0 0 224 288"/>
+<path class="door" d="M264 256 H296 A32 32 0 0 1 264 288"/>
+<path class="door" d="M656 312 V280 A32 32 0 0 1 688 312"/>
+<path class="door" d="M334 408 V436 A28 28 0 0 0 362 408"/>
+<path class="door" d="M438 408 V436 A28 28 0 0 0 466 408"/>
+<path class="door" d="M542 408 V436 A28 28 0 0 0 570 408"/>
+<path class="door" d="M784 60 H760 A24 24 0 0 0 784 84"/>
+<path class="door" d="M784 156 H760 A24 24 0 0 0 784 180"/>
+<path class="door" d="M784 252 H760 A24 24 0 0 0 784 276"/>
+<path class="door main" d="M744 536 V496 A40 40 0 0 1 784 536"/>
+</g>
+<line class="screen-wall" x1="72" y1="32" x2="192" y2="32"/>
+<g class="labels">
+<text class="zlabel" x="280" y="44">СТАНДАРТ</text>
+<text class="zlabel vip" x="662" y="156" transform="rotate(-90 662 156)" text-anchor="middle">BOOTCAMP · VIP</text>
+<text class="zlabel solo" x="452" y="456" text-anchor="middle">SOLO · ТРИ КОМНАТЫ</text>
+<text class="room-label muted" x="836" y="76" text-anchor="middle">WC</text>
+</g>
+<g class="rooms">
+<g class="room" data-zone="projector" data-room="projector" aria-label="Комната с проектором и PS5, до 10 человек"><g class="furn"><rect class="table" x="100" y="84" width="64" height="120" rx="6"/><rect class="sofa" x="60" y="80" width="24" height="128" rx="8"/><rect class="back" x="60" y="84" width="7" height="120" rx="3.5"/><rect class="sofa" x="180" y="80" width="24" height="128" rx="8"/><rect class="back" x="197" y="84" width="7" height="120" rx="3.5"/></g><rect class="proj-dev" x="125" y="228" width="14" height="8" rx="2"/><text class="zlabel" x="132.0" y="286" text-anchor="middle">ПРОЕКТОР</text><text class="cap" x="132.0" y="301" text-anchor="middle">до 10 человек</text><rect class="hit" x="44" y="28" width="176" height="280" rx="6"/></g>
+<g class="room" data-zone="ps5" data-room="ps5-2" aria-label="Комната PS5 · 2"><rect class="hit" x="788" y="124" width="96" height="88" rx="6"/><g class="ico" transform="translate(796.0 162.0)"><path d="M4 1h10a4 4 0 0 1 4 4v1.5a4.5 4.5 0 0 1-8 2.8h-2a4.5 4.5 0 0 1-8-2.8V5a4 4 0 0 1 4-4z"/><path d="M5 4v3M3.5 5.5h3"/><circle cx="12.5" cy="4.6" r=".9"/><circle cx="14.6" cy="6.6" r=".9"/></g><text class="room-label" x="846.0" y="172.0" text-anchor="middle">PS5 · 2</text></g>
+<g class="room" data-zone="ps5" data-room="ps5-1" aria-label="Комната PS5 · 1"><rect class="hit" x="788" y="220" width="96" height="88" rx="6"/><g class="ico" transform="translate(796.0 258.0)"><path d="M4 1h10a4 4 0 0 1 4 4v1.5a4.5 4.5 0 0 1-8 2.8h-2a4.5 4.5 0 0 1-8-2.8V5a4 4 0 0 1 4-4z"/><path d="M5 4v3M3.5 5.5h3"/><circle cx="12.5" cy="4.6" r=".9"/><circle cx="14.6" cy="6.6" r=".9"/></g><text class="room-label" x="846.0" y="268.0" text-anchor="middle">PS5 · 1</text></g>
+</g>
+<g class="desks">
+<rect x="300" y="56" width="120" height="14" rx="3"/>
+<rect x="460" y="56" width="160" height="14" rx="3"/>
+<rect x="300" y="124" width="120" height="14" rx="3"/>
+<rect x="460" y="124" width="160" height="14" rx="3"/>
+<rect x="300" y="212" width="120" height="14" rx="3"/>
+<rect x="460" y="212" width="160" height="14" rx="3"/>
+<rect x="724" y="40" width="14" height="224" rx="3"/>
+<rect x="308" y="318" width="80" height="14" rx="3"/>
+<rect x="412" y="318" width="80" height="14" rx="3"/>
+<rect x="516" y="318" width="80" height="14" rx="3"/>
+</g>
+<g class="seats">
+<g class="seat z-standard" data-zone="standard" data-seat="1" style="--i:23" aria-label="Место 1, Стандарт"><rect class="body" x="584" y="230" width="32" height="32" rx="7"/><rect class="mon" x="591" y="217" width="18" height="4" rx="2"/><text x="600" y="250" text-anchor="middle">1</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="2" style="--i:20" aria-label="Место 2, Стандарт"><rect class="body" x="544" y="230" width="32" height="32" rx="7"/><rect class="mon" x="551" y="217" width="18" height="4" rx="2"/><text x="560" y="250" text-anchor="middle">2</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="3" style="--i:16" aria-label="Место 3, Стандарт"><rect class="body" x="504" y="230" width="32" height="32" rx="7"/><rect class="mon" x="511" y="217" width="18" height="4" rx="2"/><text x="520" y="250" text-anchor="middle">3</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="4" style="--i:13" aria-label="Место 4, Стандарт"><rect class="body" x="464" y="230" width="32" height="32" rx="7"/><rect class="mon" x="471" y="217" width="18" height="4" rx="2"/><text x="480" y="250" text-anchor="middle">4</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="5" style="--i:9" aria-label="Место 5, Стандарт"><rect class="body" x="384" y="230" width="32" height="32" rx="7"/><rect class="mon" x="391" y="217" width="18" height="4" rx="2"/><text x="400" y="250" text-anchor="middle">5</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="6" style="--i:6" aria-label="Место 6, Стандарт"><rect class="body" x="344" y="230" width="32" height="32" rx="7"/><rect class="mon" x="351" y="217" width="18" height="4" rx="2"/><text x="360" y="250" text-anchor="middle">6</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="7" style="--i:2" aria-label="Место 7, Стандарт"><rect class="body" x="304" y="230" width="32" height="32" rx="7"/><rect class="mon" x="311" y="217" width="18" height="4" rx="2"/><text x="320" y="250" text-anchor="middle">7</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="8" style="--i:1" aria-label="Место 8, Стандарт"><rect class="body" x="304" y="142" width="32" height="32" rx="7"/><rect class="mon" x="311" y="129" width="18" height="4" rx="2"/><text x="320" y="162" text-anchor="middle">8</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="9" style="--i:5" aria-label="Место 9, Стандарт"><rect class="body" x="344" y="142" width="32" height="32" rx="7"/><rect class="mon" x="351" y="129" width="18" height="4" rx="2"/><text x="360" y="162" text-anchor="middle">9</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="10" style="--i:8" aria-label="Место 10, Стандарт"><rect class="body" x="384" y="142" width="32" height="32" rx="7"/><rect class="mon" x="391" y="129" width="18" height="4" rx="2"/><text x="400" y="162" text-anchor="middle">10</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="11" style="--i:12" aria-label="Место 11, Стандарт"><rect class="body" x="464" y="142" width="32" height="32" rx="7"/><rect class="mon" x="471" y="129" width="18" height="4" rx="2"/><text x="480" y="162" text-anchor="middle">11</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="12" style="--i:15" aria-label="Место 12, Стандарт"><rect class="body" x="504" y="142" width="32" height="32" rx="7"/><rect class="mon" x="511" y="129" width="18" height="4" rx="2"/><text x="520" y="162" text-anchor="middle">12</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="13" style="--i:19" aria-label="Место 13, Стандарт"><rect class="body" x="544" y="142" width="32" height="32" rx="7"/><rect class="mon" x="551" y="129" width="18" height="4" rx="2"/><text x="560" y="162" text-anchor="middle">13</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="14" style="--i:22" aria-label="Место 14, Стандарт"><rect class="body" x="584" y="142" width="32" height="32" rx="7"/><rect class="mon" x="591" y="129" width="18" height="4" rx="2"/><text x="600" y="162" text-anchor="middle">14</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="15" style="--i:21" aria-label="Место 15, Стандарт"><rect class="body" x="584" y="74" width="32" height="32" rx="7"/><rect class="mon" x="591" y="61" width="18" height="4" rx="2"/><text x="600" y="94" text-anchor="middle">15</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="16" style="--i:18" aria-label="Место 16, Стандарт"><rect class="body" x="544" y="74" width="32" height="32" rx="7"/><rect class="mon" x="551" y="61" width="18" height="4" rx="2"/><text x="560" y="94" text-anchor="middle">16</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="17" style="--i:14" aria-label="Место 17, Стандарт"><rect class="body" x="504" y="74" width="32" height="32" rx="7"/><rect class="mon" x="511" y="61" width="18" height="4" rx="2"/><text x="520" y="94" text-anchor="middle">17</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="18" style="--i:11" aria-label="Место 18, Стандарт"><rect class="body" x="464" y="74" width="32" height="32" rx="7"/><rect class="mon" x="471" y="61" width="18" height="4" rx="2"/><text x="480" y="94" text-anchor="middle">18</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="19" style="--i:7" aria-label="Место 19, Стандарт"><rect class="body" x="384" y="74" width="32" height="32" rx="7"/><rect class="mon" x="391" y="61" width="18" height="4" rx="2"/><text x="400" y="94" text-anchor="middle">19</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="20" style="--i:4" aria-label="Место 20, Стандарт"><rect class="body" x="344" y="74" width="32" height="32" rx="7"/><rect class="mon" x="351" y="61" width="18" height="4" rx="2"/><text x="360" y="94" text-anchor="middle">20</text></g>
+<g class="seat z-standard" data-zone="standard" data-seat="21" style="--i:0" aria-label="Место 21, Стандарт"><rect class="body" x="304" y="74" width="32" height="32" rx="7"/><rect class="mon" x="311" y="61" width="18" height="4" rx="2"/><text x="320" y="94" text-anchor="middle">21</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="22" style="--i:24" aria-label="Место 22, Bootcamp VIP"><rect class="body" x="688" y="48" width="32" height="32" rx="7"/><rect class="mon" x="729" y="55" width="4" height="18" rx="2"/><text x="704" y="68" text-anchor="middle">22</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="23" style="--i:25" aria-label="Место 23, Bootcamp VIP"><rect class="body" x="688" y="92" width="32" height="32" rx="7"/><rect class="mon" x="729" y="99" width="4" height="18" rx="2"/><text x="704" y="112" text-anchor="middle">23</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="24" style="--i:26" aria-label="Место 24, Bootcamp VIP"><rect class="body" x="688" y="136" width="32" height="32" rx="7"/><rect class="mon" x="729" y="143" width="4" height="18" rx="2"/><text x="704" y="156" text-anchor="middle">24</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="25" style="--i:27" aria-label="Место 25, Bootcamp VIP"><rect class="body" x="688" y="180" width="32" height="32" rx="7"/><rect class="mon" x="729" y="187" width="4" height="18" rx="2"/><text x="704" y="200" text-anchor="middle">25</text></g>
+<g class="seat z-vip" data-zone="vip" data-seat="26" style="--i:28" aria-label="Место 26, Bootcamp VIP"><rect class="body" x="688" y="224" width="32" height="32" rx="7"/><rect class="mon" x="729" y="231" width="4" height="18" rx="2"/><text x="704" y="244" text-anchor="middle">26</text></g>
+<g class="seat z-solo" data-zone="solo" data-seat="27" style="--i:3" aria-label="Solo 1, Solo"><rect class="body" x="312" y="336" width="72" height="32" rx="7"/><rect class="mon" x="334" y="323" width="28" height="4" rx="2"/><text x="348" y="356" text-anchor="middle">Solo 1</text></g>
+<g class="seat z-solo" data-zone="solo" data-seat="28" style="--i:10" aria-label="Solo 2, Solo"><rect class="body" x="416" y="336" width="72" height="32" rx="7"/><rect class="mon" x="438" y="323" width="28" height="4" rx="2"/><text x="452" y="356" text-anchor="middle">Solo 2</text></g>
+<g class="seat z-solo" data-zone="solo" data-seat="29" style="--i:17" aria-label="Solo 3, Solo"><rect class="body" x="520" y="336" width="72" height="32" rx="7"/><rect class="mon" x="542" y="323" width="28" height="4" rx="2"/><text x="556" y="356" text-anchor="middle">Solo 3</text></g>
+</g>
+<g class="counter" role="img" aria-label="Стойка администратора"><text class="zlabel" x="56" y="420">СТОЙКА · АДМИН</text><polygon class="top" points="56,432 216,432 216,504 192,504 192,456 56,456"/><rect class="mon" x="197" y="475" width="4" height="18" rx="2"/><rect class="chair" x="156" y="468" width="32" height="32" rx="7"/><g class="ico" transform="translate(164 475)"><circle cx="8" cy="5" r="3.6"/><path d="M1.5 17a6.5 6.5 0 0 1 13 0"/></g></g>
+<g class="entrance"><path d="M764 584 V554 m-6 6 l6 -6 l6 6"/><text x="750" y="578" text-anchor="end">Вход</text></g>
+</svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- зоны -->
+  <section class="zones wrap" id="zones" aria-labelledby="zones-h">
+    <div class="head">
+      <div><p class="kick">Зоны</p><h2 class="h2" id="zones-h">Общий зал, <span class="lt">свои</span> комнаты</h2></div>
+      <p class="lead">Везде мышь Logitech G403 Hero, гарнитура HyperX Cloud 2 и кресла Zone 51. Цены — за час в будни.</p>
+    </div>
+    <div class="bento">
+      <article class="tile t-std" tabindex="0">
+        <img src="img/z-standard.jpg" alt="Ряд кресел Zone 51 в зоне Стандарт" width="1280" height="853" loading="lazy">
+        <span class="where">Обе точки · 37 ПК</span>
+        <h3>Стандарт</h3>
+        <p class="big num">144<small>Гц</small></p>
+        <ul class="spec"><li>i5-10400F</li><li>RTX 3060</li><li>16 GB</li><li>ASUS TUF 144 Гц</li><li>Red Square Keyrox TKL</li></ul>
+        <p class="from">от <b class="num">95 ₽</b> в час</p>
+      </article>
+      <article class="tile t-vip" tabindex="0">
+        <img src="img/z-bootcamp.jpg" alt="Дверь комнаты BOOTCAMP с синей подсветкой" width="1280" height="853" loading="lazy">
+        <span class="where">Обе точки · 11 ПК</span>
+        <h3><a href="zona-bootcamp.html">Bootcamp · VIP</a></h3>
+        <p class="big num">240<small>Гц</small></p>
+        <ul class="spec"><li>i7-12700F</li><li>RTX 4060</li><li>32 GB</li><li>Lenovo Legion 240 Гц</li></ul>
+        <p class="from">от <b class="num">165 ₽</b> в час</p>
+      </article>
+      <article class="tile t-solo" tabindex="0">
+        <img src="img/z-solo.jpg" alt="Двери отдельных комнат SOLO 1 и SOLO 2" width="1280" height="853" loading="lazy">
+        <span class="where">Героев-Североморцев · 3 комнаты</span>
+        <h3><a href="zona-solo.html">Solo</a></h3>
+        <p class="big">RTX 4070</p>
+        <ul class="spec"><li>i7-12700F</li><li>32 GB</li><li>BenQ 2K 240 Гц</li><li>своя дверь</li></ul>
+        <p class="from">от <b class="num">215 ₽</b> в час</p>
+      </article>
+      <article class="tile t-ps5" tabindex="0">
+        <img src="img/z-ps5.jpg" alt="TV-комната: большой телевизор и диван" width="1280" height="853" loading="lazy">
+        <span class="where">Героев-Североморцев · 2 комнаты</span>
+        <h3><a href="ps5.html">TV с PS5</a></h3>
+        <ul class="spec"><li>до 4 человек</li><li>2 геймпада</li></ul>
+        <p class="from"><b class="num">450 ₽</b> в час за комнату</p>
+      </article>
+      <article class="tile t-proj" tabindex="0">
+        <img src="img/z-projector.jpg" alt="Проекторная: экран, стол и диваны, мурал на стене" width="1280" height="853" loading="lazy">
+        <span class="where">Героев-Североморцев</span>
+        <h3><a href="ps5.html">Проекторная с PS5</a></h3>
+        <ul class="spec"><li>PS5 на большом экране</li><li>до 10 человек</li><li>стол и два дивана</li></ul>
+        <p class="from"><b class="num">800 ₽</b> в час за всю компанию</p>
+      </article>
+      <div class="tile t-note">
+        <p>Номера на схеме совпадают с номерами мест в приложении.</p>
+        <p class="mini">Выберите место на схеме выше и забронируйте его в LANGAME со скидкой 5 %.</p>
+        <a class="btn sm" href="#map" style="align-self:flex-start">К схеме зала</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- железо -->
+  <section class="iron wrap" id="iron" aria-labelledby="iron-h">
+    <p class="kick">Железо</p>
+    <h2 class="h2" id="iron-h">Что <span class="lt">под</span> столом</h2>
+    <div class="story">
+      <div class="stage" aria-hidden="true">
+        <figure class="on" data-step="0"><img src="img/seat.jpg" alt="" width="1280" height="853" loading="lazy"><figcaption><span class="mega num" data-count="240">240 Гц</span></figcaption></figure>
+        <figure data-step="1"><img src="img/pc-rgb.jpg" alt="" width="1280" height="853" loading="lazy"><figcaption><span class="mega">RTX 4070</span></figcaption></figure>
+        <figure data-step="2"><img src="img/chair.jpg" alt="" width="1280" height="853" loading="lazy"><figcaption><span class="mega">Zone 51</span></figcaption></figure>
+      </div>
+      <div class="steps">
+        <div class="step" data-step="0">
+          <div class="inline"><img src="img/seat.jpg" alt="Место в зале: монитор и клавиатура с подсветкой" width="1280" height="853" loading="lazy"><span class="mega num">240 Гц</span></div>
+          <h3>Мониторы</h3>
+          <p>В Bootcamp и Solo — 240 Гц, в Стандарте — 144 Гц. В Solo экран 2K.</p>
+          <ul class="rows"><li><span>Стандарт</span><b>ASUS TUF, 144 Гц</b></li><li><span>Bootcamp</span><b>Lenovo Legion, 240 Гц</b></li><li><span>Solo</span><b>BenQ 2K, 240 Гц</b></li></ul>
+        </div>
+        <div class="step" data-step="1">
+          <div class="inline"><img src="img/pc-rgb.jpg" alt="Системный блок с подсветкой кулера и памяти" width="1280" height="853" loading="lazy"><span class="mega">RTX 4070</span></div>
+          <h3>Видеокарты и процессоры</h3>
+          <p>Везде SSD. В Bootcamp и Solo — 32 GB памяти.</p>
+          <ul class="rows"><li><span>Стандарт</span><b>i5-10400F · RTX 3060 · 16 GB</b></li><li><span>Bootcamp</span><b>i7-12700F · RTX 4060 · 32 GB</b></li><li><span>Solo</span><b>i7-12700F · RTX 4070 · 32 GB</b></li></ul>
+        </div>
+        <div class="step" data-step="2">
+          <div class="inline"><img src="img/chair.jpg" alt="Кресло Zone 51 в зале на Карла Маркса" width="1280" height="853" loading="lazy"><span class="mega">Zone 51</span></div>
+          <h3>Кресла и периферия</h3>
+          <p>Одинаковые во всех зонах. Гарнитуру HyperX и мышь Logitech G PRO можно взять напрокат на месте.</p>
+          <ul class="rows"><li><span>Кресло</span><b>Zone 51 Cyberpunk Royal</b></li><li><span>Мышь</span><b>Logitech G403 Hero</b></li><li><span>Гарнитура</span><b>HyperX Cloud 2</b></li><li><span>Клавиатура</span><b>Red Square Keyrox TKL Fireworks (Стандарт)</b></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="spec-t" tabindex="0" role="region" aria-label="Сравнение зон по железу">
+      <table>
+        <thead><tr><th scope="col"><span class="sr">Параметр</span></th><th scope="col">Стандарт</th><th scope="col" class="v">Bootcamp</th><th scope="col" class="s">Solo</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Где</th><td>обе точки</td><td>обе точки</td><td>Героев-Североморцев</td></tr>
+          <tr><th scope="row">Процессор</th><td>i5-10400F</td><td>i7-12700F</td><td>i7-12700F</td></tr>
+          <tr><th scope="row">Видеокарта</th><td>RTX 3060</td><td>RTX 4060</td><td>RTX 4070</td></tr>
+          <tr><th scope="row">Память</th><td>16 GB</td><td>32 GB</td><td>32 GB</td></tr>
+          <tr><th scope="row">Монитор</th><td>ASUS TUF 144 Гц</td><td>Lenovo Legion 240 Гц</td><td>BenQ 2K 240 Гц</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- калькулятор -->
+  <section class="calc wrap" id="calc" aria-labelledby="calc-h">
+    <p class="kick">Цены</p>
+    <div class="calc-h"><h2 class="h2" id="calc-h">Посчитайте <span class="lt">свой</span> вечер</h2><a class="btn ghost" href="ceny.html">Все цены <span class="ar" aria-hidden="true">→</span></a></div>
+    <div class="box">
+      <form id="calc-f" aria-label="Калькулятор цены">
+        <fieldset><legend>Клуб</legend><div class="seg" id="f-club">
+          <input type="radio" name="club" id="c-km" value="km" checked><label for="c-km">Карла Маркса</label>
+          <input type="radio" name="club" id="c-gs" value="gs"><label for="c-gs">Героев-Североморцев</label>
+        </div></fieldset>
+        <fieldset><legend>Зона</legend><div class="seg" id="f-zone"></div></fieldset>
+        <fieldset><legend id="pack-l">Пакет</legend><div class="seg" id="f-pack"></div></fieldset>
+        <fieldset id="f-time-w"><legend>Время</legend><div class="seg" id="f-time">
+          <input type="radio" name="time" id="t-day" value="day" checked><label for="t-day">Днём, 08:00–17:00</label>
+          <input type="radio" name="time" id="t-eve" value="eve"><label for="t-eve">Вечером</label>
+        </div><p class="fnote" id="time-n">Днём час в Стандарте — 95 ₽, каждый день.</p></fieldset>
+        <fieldset><legend>Дни</legend><div class="seg" id="f-days">
+          <input type="radio" name="days" id="d-wd" value="0" checked><label for="d-wd">Пн–Чт</label>
+          <input type="radio" name="days" id="d-we" value="1"><label for="d-we">Пт–Вс</label>
+        </div></fieldset>
+        <label class="switch" for="app"><input type="checkbox" id="app"><span>Бронь в приложении LANGAME<small id="app-n">−5 % к брони ПК</small></span></label>
+      </form>
+      <div class="out">
+        <img src="img/in-game.jpg" alt="" width="1280" height="853" loading="lazy">
+        <p class="what" id="o-what">Стандарт · Ночь</p>
+        <div>
+          <p class="old num" id="o-old"></p>
+          <p class="price num" aria-live="polite"><span id="o-price">760</span><span class="cur">₽</span></p>
+        </div>
+        <ul class="facts" id="o-facts"></ul>
+        <a class="btn" id="calc-book" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" style="align-self:flex-start">Забронировать <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="day">
+      <p class="n num">95<small>₽</small></p>
+      <div><h3>Днём дешевле</h3><p>Каждый день с 08:00 до 17:00 — 95 ₽ за час в зоне Стандарт, на обеих точках.</p></div>
+      <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать <span class="ar" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- ночь -->
+  <section class="nightband" aria-labelledby="night-h">
+    <img src="img/mural.jpg" alt="" width="1280" height="853" loading="lazy">
+    <div class="wrap">
+      <h2 class="kick" id="night-h">Пакет «Ночь»</h2>
+      <p class="times num" aria-label="с 22:00 до 10:00"><span>22:00</span><span class="to">→10:00</span></p>
+      <div class="grid">
+        <p>Двенадцать часов одним пакетом, без доплат за часы.</p>
+        <div class="pr">
+          <div><b class="num">800 ₽</b><span>Карла Маркса, Стандарт, Пн–Чт</span></div>
+          <div><b class="num">880 ₽</b><span>Героев-Североморцев, Стандарт, Пн–Чт</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- акции -->
+  <section class="promo wrap" id="promo" aria-labelledby="promo-h">
+    <p class="kick">Акции</p>
+    <h2 class="h2" id="promo-h">Сейчас <span class="lt">действуют</span></h2>
+    <ul class="plist">
+      <li><span class="k num">95&nbsp;₽</span><div><h3>Днём дешевле</h3><p>Час в Стандарте каждый день с 08:00 до 17:00.</p></div><p class="c"><b>Обе точки</b><span>Зона Стандарт</span></p></li>
+      <li><span class="k num">−5&nbsp;%</span><div><h3>Бронь в приложении</h3><p>Скидка к любой брони ПК в LANGAME. Бронь по предоплате, ПК держим за 30 минут до начала.</p></div><p class="c"><b>Обе точки</b><a href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Открыть LANGAME</a></p></li>
+      <li><span class="k num"><small>до</small>15&nbsp;%</span><div><h3>Кэшбэк бонусами за каждую сессию</h3><p>GOLD — 5&nbsp;%, PLATINUM — 10&nbsp;%, BLACK — 15&nbsp;%. Уровень растёт с наигранными часами: GOLD — от 100, PLATINUM — от 300, BLACK — от 500 часов.</p></div><p class="c"><b>Обе точки</b><span>Уровни гостя в LANGAME</span></p></li>
+      <li><span class="k">PS5</span><div><h3>К ночному пакету — PS5</h3><p>До 2 часов в PS5-комнате бесплатно во время ночного пакета, если комната свободна.</p></div><p class="c"><b>Героев-Североморцев, 62</b><span>Пакет «Ночь», 22:00–10:00</span></p></li>
+    </ul>
+
+    <div class="pgrp">
+      <h3>Бонусы за дело</h3>
+      <p>Начисляются в мини-приложении <a href="#nagrind">НАГРИНД</a>. 1 бонус = 1&nbsp;₽, бонусами можно оплатить до половины игры.</p>
+    </div>
+    <ul class="plist sm">
+      <li><span class="k num">1 000</span><div><h3>Подарок на день рождения</h3><p>За 2 дня до дня рождения, в сам день или в течение 2 дней после. Нужны визит в клуб, своя привязанная учётная запись LANGAME и документ с именем и датой рождения.</p></div><p class="c"><b>Обе точки</b></p></li>
+      <li><span class="k num">500</span><div><h3>Приведите друга</h3><p>В день первого визита друг называет вас администратору и покупает пакет или пополняет баланс. Подтверждение — в тот же день до 23:59.</p></div><p class="c"><b>Обе точки</b><span>За каждого нового гостя</span></p></li>
+      <li><span class="k num"><small>до</small>500</span><div><h3>Оплатим такси до клуба</h3><p>Приезжайте на такси и в тот же день пополните баланс минимум на стоимость поездки. Отправьте два подтверждения до 23:59 — вернём стоимость дороги бонусами, максимум 500.</p></div><p class="c"><b>Обе точки</b><span>Каждая поездка — отдельная заявка</span></p></li>
+      <li><span class="k">Кейс</span><div><h3>За пополнение от 100&nbsp;₽</h3><p>Одним платежом от 100&nbsp;₽ — Silver, от 500&nbsp;₽ — Gold, за каждую полную 1 000&nbsp;₽ — Platinum. В кейсах бонусы до 300 и до 2 часов PS5.</p></div><p class="c"><b>Обе точки</b><span>Шансы призов видны в приложении</span></p></li>
+      <li><span class="k num">+500</span><div><h3>Батлпасс «Осень 2026»</h3><p>192 испытания в 64 играх: 20, 50 или 100 бонусов за испытание. Закройте 28 испытаний за 12 разных дней в клубе — ещё 500 сверху.</p></div><p class="c"><b>Обе точки</b></p></li>
+      <li><span class="k num">+70</span><div><h3>За пакеты</h3><p>Ночной пакет — 70 бонусов, пакет от 3 часов — 50, аренда TV-комнаты — 50. Каждое можно повторить через 7 суток.</p></div><p class="c"><b>Обе точки</b><span>TV-комнаты — на Героев-Североморцев</span></p></li>
+      <li><span class="k num">20→80</span><div><h3>За визиты недели</h3><p>1-й визит недели — 20 бонусов, 2-й — 50, 3-й — 80, дальше по 20. Ещё 20 — за визит в будний день и 20 — если начать сессию с 08:00 до 12:00.</p></div><p class="c"><b>Обе точки</b><span>Визит подтверждается из LANGAME</span></p></li>
+    </ul>
+  </section>
+
+
+  <!-- НАГРИНД -->
+  <section class="nag" id="nagrind" aria-labelledby="nag-h">
+    <div class="wrap">
+      <div class="nag-top">
+        <div class="nag-l">
+          <p class="kick nag-k">Бонусы · НАГРИНД</p>
+          <h2 class="h2" id="nag-h">Играй <span class="lt">и</span> <span class="gain">плати бонусами</span></h2>
+          <p class="lead">НАГРИНД — мини-приложение БАЗЫ в Telegram и VK. Бонусы капают за визиты, миссии, кейсы и уровни, а потом оплачивают игру в клубе.</p>
+          <dl class="nag-eq">
+            <div><dt class="num">1 = 1&nbsp;₽</dt><dd>бонус переводится в LANGAME один к одному</dd></div>
+            <div><dt class="num">50&nbsp;%</dt><dd>стоимости игры можно оплатить бонусами</dd></div>
+            <div><dt class="w">Без срока</dt><dd>бонусы не сгорают</dd></div>
+          </dl>
+          <div class="nag-acts">
+            <a class="btn gain-btn" href="https://t.me/cyberxbazaquestbot" target="_blank" rel="noopener"><svg class="bi" aria-hidden="true"><use href="#i-tg"/></svg>Открыть в Telegram <span class="ar" aria-hidden="true">→</span></a>
+            <a class="btn ghost" href="https://vk.com/app54654393#network=baza" target="_blank" rel="noopener"><svg class="bi" aria-hidden="true"><use href="#i-vk"/></svg>Открыть в VK</a>
+          </div>
+        </div>
+        <div>
+          <div class="shots" tabindex="0" role="region" aria-label="Экраны приложения">
+            <figure class="shot"><img src="img/nag-missions.jpg" alt="Миссии: такси до клуба — до 500 бонусов, день рождения — 1000, привести друга — 500, ночной пакет — 70" width="600" height="1298" loading="lazy"></figure>
+            <figure class="shot"><img src="img/nag-home.jpg" alt="Главный экран: баланс бонусов, отметка дня 4 из 7, ближайшие миссии" width="600" height="1298" loading="lazy"></figure>
+            <figure class="shot"><img src="img/nag-level.jpg" alt="Профиль: уровень 21 «Постоянник», награда на 30 уровне — 200 бонусов, достижения" width="600" height="1298" loading="lazy"></figure>
+          </div>
+          <p class="shots-cap">Экраны приложения БАЗЫ. Баланс и уровень — пример профиля.</p>
+        </div>
+      </div>
+
+      <div class="nag-mid">
+        <div class="week">
+          <h3>Неделя <span class="gain">в цифрах</span></h3>
+          <p class="sub">Три визита, один из них — ночь. Только правила, которые действуют сейчас.</p>
+          <ul>
+            <li><span>1-й визит недели</span><b class="num">+20</b></li>
+            <li><span>2-й визит</span><b class="num">+50</b></li>
+            <li><span>3-й визит</span><b class="num">+80</b></li>
+            <li><span>Визит в будний день</span><b class="num">+20</b></li>
+            <li><span>Ночной пакет</span><b class="num">+70</b></li>
+          </ul>
+          <p class="sum"><span>Итого бонусов</span><b class="num">240</b></p>
+          <div class="pay">
+            <p>Пакет «5 часов» в Стандарте на Карла Маркса, <span style="white-space:nowrap">Пн–Чт</span>:</p>
+            <strong class="num"><s>580&nbsp;₽</s> 340&nbsp;₽</strong>
+            <p>деньгами — остальные 240&nbsp;₽ оплачивают бонусы</p>
+          </div>
+          <p class="note">Сверху — кейс за каждое пополнение от 100&nbsp;₽ и кэшбэк LANGAME от 5&nbsp;% на уровне GOLD.</p>
+        </div>
+
+        <div class="earn">
+          <h3>Где ещё <span class="gain">копятся</span></h3>
+          <ul>
+            <li><h4>Миссии</h4><p>13 заданий: визиты, пакеты, такси, друзья, подписки. Выполнил — жмёшь «Проверить» или отправляешь подтверждение.</p><b class="num">+20…1000</b></li>
+            <li><h4>Кейсы</h4><p>Silver, Gold и Platinum — за пополнение от 100&nbsp;₽ или за 50, 100 и 200 бонусов. Внутри до 300 бонусов и до 2 часов PS5, шансы видны заранее.</p><b class="num">до 300</b></li>
+            <li><h4>100 уровней</h4><p>Опыт за визиты, миссии и отметки. Каждые 10 уровней — награда: от +100 до +500 бонусов или кейс.</p><b class="num">1 500 + 5 кейсов</b></li>
+            <li><h4>Батлпасс «Осень 2026»</h4><p>192 испытания в 64 играх — от CS2 и Dota 2 до Roblox. 28 испытаний за 12 дней в клубе — ещё +500.</p><b class="num">20 / 50 / 100</b></li>
+            <li><h4>Отметка дня</h4><p>Заходи в приложение каждый день: 3 дня подряд — +10, 5 дней — +20, 7 дней — Silver кейс.</p><b>кейс</b></li>
+            <li><h4>День рождения</h4><p>За 2 дня до, в сам день или 2 дня после. Нужны визит в клуб и документ с датой рождения.</p><b class="num">+1 000</b></li>
+            <li><h4>Кэшбэк LANGAME</h4><p>С каждой сессии: GOLD — 5&nbsp;%, PLATINUM — 10&nbsp;%, BLACK — 15&nbsp;%. Уровень растёт с наигранными часами.</p><b class="num">до 15&nbsp;%</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <ol class="nag-steps">
+        <li><span><b>Открой приложение</b> в Telegram или VK — кнопки ниже.</span></li>
+        <li><span><b>Подтверди телефон и привяжи LANGAME</b> — визиты начнут засчитываться сами.</span></li>
+        <li><span><b>Копи и переводи</b> бонусы в LANGAME — перевод подтверждает администратор, дальше платишь ими за игру.</span></li>
+      </ol>
+      <div class="nag-bottom">
+        <a class="btn gain-btn" href="https://t.me/cyberxbazaquestbot" target="_blank" rel="noopener"><svg class="bi" aria-hidden="true"><use href="#i-tg"/></svg>Открыть в Telegram <span class="ar" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="https://vk.com/app54654393#network=baza" target="_blank" rel="noopener"><svg class="bi" aria-hidden="true"><use href="#i-vk"/></svg>Открыть в VK</a>
+        <a class="btn ghost" href="nagrind.html">Все миссии и шансы кейсов <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- компании -->
+  <section class="crew wrap" id="crew" aria-labelledby="crew-h">
+    <p class="kick">Для компаний · Героев-Североморцев</p>
+    <h2 class="h2" id="crew-h">Приходите <span class="lt">вместе</span></h2>
+    <div class="pair">
+      <article class="room-c">
+        <img src="img/z-projector.jpg" alt="Проекторная: большой экран, стол и диваны" width="1280" height="853" loading="lazy">
+        <div class="cap"><b class="num">10</b><span>человек<br>максимум</span></div>
+        <div><h3>Проекторная с PS5</h3><p>Большой экран, PS5, общий стол и два дивана — для турнира, фильма или дня рождения.</p><p class="pp num">800 ₽ <small>в час за всю компанию</small></p></div>
+      </article>
+      <article class="room-c ps">
+        <img src="img/ps5-pads.jpg" alt="Два белых геймпада DualSense на подставке" width="1280" height="853" loading="lazy">
+        <div class="cap"><b class="num">4</b><span>человека<br>в комнате</span></div>
+        <div style="align-self:end"><h3>TV-комнаты с PS5</h3><p>Две комнаты с телевизором и диваном, на каждую — 2 геймпада.</p><p class="pp num">450 ₽ <small>в час за комнату</small></p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- рейтинг -->
+  <section class="rate" id="reviews" aria-labelledby="rv-h">
+    <h2 class="sr" id="rv-h">Отзывы</h2>
+    <div class="wrap">
+      <div class="scores">
+        <a class="score" href="https://yandex.ru/maps/org/baza/23967097444/reviews/" target="_blank" rel="noopener"><span class="v num">5,0</span><span class="l">Яндекс Карты<small>73 отзыва →</small></span></a>
+        <a class="score" href="https://2gis.ru/murmansk/firm/70000001088267283/tab/reviews" target="_blank" rel="noopener"><span class="v num">5,0</span><span class="l">2ГИС<small>136 отзывов →</small></span></a>
+        <p class="t">Оценки гостей клуба на Карла Маркса, 38, сентябрь 2026.</p>
+      </div>
+    </div>
+    <div class="rv-wrap">
+      <div class="rv-bar wrap"><div><p class="kick">Самые подробные отзывы · обе точки</p><p class="rv-other">Отзывы о Героев-Североморцев, 62 — <a href="https://yandex.ru/maps/org/baza/44333217761/reviews/" target="_blank" rel="noopener">на Яндекс Картах</a></p></div><div class="rv-nav"><button type="button" class="rv-b" id="rv-prev" aria-label="Предыдущие отзывы">←</button><button type="button" class="rv-b" id="rv-next" aria-label="Следующие отзывы">→</button></div></div>
+      <div class="rv-track" id="rv-track" tabindex="0" role="region" aria-label="Отзывы гостей с Яндекс Карт и 2ГИС"></div>
+    </div>
+  </section>
+
+  <!-- вопросы -->
+  <section class="faq wrap" id="faq" aria-labelledby="faq-h">
+    <div class="grid">
+      <div class="aside">
+        <p class="kick">Вопросы</p>
+        <h2 class="h2" id="faq-h">Частые <span class="lt">вопросы</span></h2>
+        <div class="tels">
+          <div><b class="num">+7 900 938-24-48</b><span>Карла Маркса, 38</span></div>
+          <div><b class="num">+7 900 938-13-01</b><span>Героев-Североморцев, 62</span></div>
+        </div>
+        <a class="btn ghost" href="faq.html" style="justify-self:start">Все вопросы <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+      <div class="qa">
+        <details open><summary>Как забронировать место?</summary><p>В приложении LANGAME: выберите клуб, время и место — номера совпадают со схемой зала на сайте. При брони в приложении — скидка 5 %.</p></details>
+        <details><summary>Что такое пакет «Ночь»?</summary><p>Двенадцать часов игры с 22:00 до 10:00 одним платежом: от 800 ₽ на Карла Маркса и от 880 ₽ на Героев-Североморцев в будни.</p></details>
+        <details><summary>Можно прийти компанией?</summary><p>Конечно. Места рядом можно выбрать на схеме и забронировать в приложении. На Героев-Североморцев есть проекторная с PS5 до 10 человек и TV-комнаты с PS5 до 4 человек.</p></details>
+        <details><summary>Где поиграть на PS5?</summary><p>На Героев-Североморцев, 62: две TV-комнаты с большим телевизором и диваном, на каждую по два геймпада, 450 ₽ в час за комнату. PS5 есть и в проекторной — для компании до 10 человек, 800 ₽ в час.</p></details>
+        <details><summary>Как получать бонусы?</summary><p>Откройте НАГРИНД в Telegram или VK и привяжите аккаунт LANGAME. Дальше выполняйте миссии, открывайте кейсы и растите в уровнях. Бонусы переводятся в LANGAME один к одному и оплачивают до половины игры.</p></details>
+        <details><summary>Как оплатить?</summary><p>Наличными или картой на стойке, по СБП или через приложение LANGAME.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- как нас найти -->
+  <section class="find wrap" id="find" aria-labelledby="find-h">
+    <p class="kick">Как нас найти</p>
+    <h2 class="h2" id="find-h">Где <span class="lt">вход</span></h2>
+    <div class="fclubs">
+        <article class="fclub" id="find-km" aria-labelledby="fkm-h">
+          <figure class="fmap">
+            <img src="img/map-km.jpg" alt="Карта 2ГИС: БАЗА в доме 38 по улице Карла Маркса, маркер на входе; рядом дома 36 и 38 к1, остановка у дороги" width="1760" height="1120" loading="lazy">
+            <span class="mark" aria-hidden="true"><b>БАЗА</b><svg viewBox="0 0 44 58" aria-hidden="true"><path d="M22 2C11 2 2 11 2 22c0 15 20 34 20 34s20-19 20-34C42 11 33 2 22 2z" fill="#3C6EFF" stroke="#fff" stroke-width="3"/><circle cx="22" cy="22" r="8" fill="#fff"/></svg></span>
+          </figure>
+          <img class="fphoto" src="img/km-entrance.jpg" alt="Вход в БАЗУ на Карла Маркса ночью: световая вывеска «БАЗА — компьютерный клуб» над спуском вниз" width="1280" height="853" loading="lazy">
+          <div class="in">
+            <p class="dist-k">Октябрьский округ</p>
+            <h3 id="fkm-h">Карла Маркса, 38</h3>
+            <ul>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21h16M7 21V4h10v17"/><circle cx="14" cy="12.5" r=".6"/></svg><span><b>Цокольный этаж.</b> Вход с улицы под световой вывеской «БАЗА», дальше лестница вниз.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17v3M16 17v3"/><circle cx="8.5" cy="14" r=".6"/><circle cx="15.5" cy="14" r=".6"/></svg><span>Остановка <b>«Кинотеатр Мурманск»</b> —&nbsp;80&nbsp;м: автобус, троллейбус, маршрутка.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M5 16h14M5 16v3M19 16v3M7.5 13h.01M16.5 13h.01"/></svg><span>Рядом есть парковка.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Круглосуточно, без выходных.</span></li>
+            </ul>
+            <p class="tel num">+7 900 938-24-48</p>
+            <div class="acts">
+              <a class="btn sm" href="https://yandex.ru/maps/org/baza/23967097444/?mode=routes&amp;rtext=~68.968366%2C33.099610" target="_blank" rel="noopener">Яндекс Карты <span class="ar" aria-hidden="true">→</span></a>
+              <a class="btn sm ghost" href="https://2gis.ru/murmansk/firm/70000001088267283" target="_blank" rel="noopener">2ГИС</a>
+              <a class="btn sm ghost" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=68.968366&amp;end-lon=33.099610&amp;appmetrica_tracking_id=1178268795219780156" target="_blank" rel="noopener">Такси</a>
+            </div>
+          </div>
+        </article>
+        <article class="fclub" id="find-gs" aria-labelledby="fgs-h">
+          <figure class="fmap">
+            <img src="img/map-gs.jpg" alt="Карта 2ГИС: БАЗА в доме 62 по проспекту Героев-Североморцев, маркер на входе на первом этаже со стороны сквера" width="1760" height="1120" loading="lazy">
+            <span class="mark" aria-hidden="true"><b>БАЗА</b><svg viewBox="0 0 44 58" aria-hidden="true"><path d="M22 2C11 2 2 11 2 22c0 15 20 34 20 34s20-19 20-34C42 11 33 2 22 2z" fill="#3C6EFF" stroke="#fff" stroke-width="3"/><circle cx="22" cy="22" r="8" fill="#fff"/></svg></span>
+          </figure>
+          <img class="fphoto" src="img/gs-entrance.jpg" alt="Вход в БАЗУ на Героев-Североморцев ночью: дверь на первом этаже с вывеской «БАЗА»" width="1280" height="853" loading="lazy">
+          <div class="in">
+            <p class="dist-k">Ленинский округ</p>
+            <h3 id="fgs-h">Героев-Североморцев, 62</h3>
+            <ul>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21h16M7 21V4h10v17"/><circle cx="14" cy="12.5" r=".6"/></svg><span><b>1 этаж.</b> Дверь с вывеской «БАЗА».</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17v3M16 17v3"/><circle cx="8.5" cy="14" r=".6"/><circle cx="15.5" cy="14" r=".6"/></svg><span>Остановка <b>«Алексея Хлобыстова»</b> —&nbsp;160&nbsp;м: автобус, троллейбус, маршрутка.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M5 16h14M5 16v3M19 16v3M7.5 13h.01M16.5 13h.01"/></svg><span>Рядом есть парковка.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Круглосуточно, без выходных.</span></li>
+            </ul>
+            <p class="tel num">+7 900 938-13-01</p>
+            <div class="acts">
+              <a class="btn sm" href="https://yandex.ru/maps/org/baza/44333217761/?mode=routes&amp;rtext=~69.007499%2C33.097452" target="_blank" rel="noopener">Яндекс Карты <span class="ar" aria-hidden="true">→</span></a>
+              <a class="btn sm ghost" href="https://2gis.ru/murmansk/firm/70000001095225260" target="_blank" rel="noopener">2ГИС</a>
+              <a class="btn sm ghost" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=69.007499&amp;end-lon=33.097452&amp;appmetrica_tracking_id=1178268795219780156" target="_blank" rel="noopener">Такси</a>
+            </div>
+          </div>
+        </article>
+    </div>
+    <p class="note">Приехали на такси? Стоимость поездки вернём бонусами, до 500 — <a class="link" href="#promo">условия в акциях</a>.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="cta"><p>Работаем круглосуточно, на обеих точках.</p><a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book style="justify-self:start">Забронировать <span class="ar" aria-hidden="true">→</span></a>
+        <div class="soc lg"><a href="https://t.me/base_51" target="_blank" rel="noopener" aria-label="БАЗА в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a><a href="https://vk.ru/baza_murmansk51" target="_blank" rel="noopener" aria-label="БАЗА во ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a></div>
+        <div class="links"><a href="ceny.html">Цены</a><a href="zhelezo.html">Железо</a><a href="nagrind.html">НАГРИНД</a><a href="novosti.html">Новости</a><a href="faq.html">Вопросы</a><a href="kontakty.html">Контакты</a></div></div>
+      <div><h3>Карла Маркса, 38</h3><p>Стандарт, Bootcamp, бар</p><p class="tel num">+7 900 938-24-48</p><p><a class="link" href="https://yandex.ru/maps/org/baza/23967097444/" target="_blank" rel="noopener">Маршрут на Яндекс Картах</a></p></div>
+      <div><h3>Героев-Североморцев, 62</h3><p>Стандарт, Bootcamp, Solo, TV с PS5, проекторная с PS5, кальян, бар</p><p class="tel num">+7 900 938-13-01</p><p><a class="link" href="https://yandex.ru/maps/org/baza/44333217761/" target="_blank" rel="noopener">Маршрут на Яндекс Картах</a></p></div>
+    </div>
+    <nav class="allp" aria-label="Все страницы"><h3>Все страницы</h3><div><a href="klub-km.html">Клуб на Карла Маркса</a><a href="klub-gs.html">Клуб на Героев-Североморцев</a><a href="zona-bootcamp.html">Bootcamp</a><a href="zona-solo.html">Solo</a><a href="ps5.html">PS5</a><a href="zhelezo.html">Железо</a><a href="ceny.html">Цены</a><a href="nagrind.html">Бонусы НАГРИНД</a><a href="novosti.html">Новости и турниры</a><a href="faq.html">Вопросы</a><a href="kontakty.html">Контакты</a></div></nav>
+    <p class="small">БАЗА — компьютерные клубы в Мурманске. Работаем круглосуточно.</p>
+  </div>
+  <span class="giant" aria-hidden="true"><svg viewBox="0 0 2400 1064"><use href="#logo"/></svg></span>
+</footer>
+
+<dialog class="bookd" id="book-dlg" aria-labelledby="book-h">
+  <div class="box">
+    <div class="hd"><h2 id="book-h">Где играем?</h2><button type="button" class="x" id="book-x" aria-label="Закрыть">✕</button></div>
+    <a class="c" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener"><b>Карла Маркса, 38</b><span>Октябрьский округ · 22 ПК</span><i aria-hidden="true">→</i></a>
+    <a class="c" href="https://langame.ru/799454404_computerniy_club_baza-geroev-severomorcev_murmansk" target="_blank" rel="noopener"><b>Героев-Североморцев, 62</b><span>Ленинский округ · 29 ПК, Solo, PS5</span><i aria-hidden="true">→</i></a>
+    <p class="n">Бронь в приложении LANGAME — скидка 5&nbsp;%.</p>
+  </div>
+</dialog>
+
+<div class="dock" id="dock">
+  <div class="sheet" id="sheet" hidden>
+    <a href="https://yandex.ru/maps/org/baza/23967097444/" target="_blank" rel="noopener">Карла Маркса, 38 <span>Яндекс Карты →</span></a>
+    <a href="https://yandex.ru/maps/org/baza/44333217761/" target="_blank" rel="noopener">Героев-Североморцев, 62 <span>Яндекс Карты →</span></a>
+  </div>
+  <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать</a>
+  <button class="btn ghost" type="button" id="route-btn" aria-expanded="false" aria-controls="sheet">Маршрут</button>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  if(!reduce) root.classList.add('fx');
+
+  /* ─── первый экран: пропуск анимации ─── */
+  var hero=document.querySelector('.hero'), skipBtn=document.getElementById('skipfx');
+  function endFx(){hero.classList.add('done'); skipBtn.hidden=true;}
+  if(reduce) skipBtn.hidden=true;
+  skipBtn.addEventListener('click',endFx);
+  hero.addEventListener('click',function(e){ if(!e.target.closest('a,button')) endFx(); });
+  setTimeout(function(){ skipBtn.hidden=true; },1600);
+
+  /* ─── шапка ─── */
+  var top=document.getElementById('top');
+  function onScroll(){ top.classList.toggle('solid', scrollY>40); }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var mb=document.querySelector('.menu-btn'), nav=document.getElementById('nav');
+  mb.addEventListener('click',function(){ var o=nav.classList.toggle('open'); mb.setAttribute('aria-expanded',String(o)); });
+  nav.addEventListener('click',function(e){ if(e.target.closest('a')){ nav.classList.remove('open'); mb.setAttribute('aria-expanded','false'); } });
+
+  /* ─── живая строка: время Мурманска (UTC+3) ─── */
+  function msk(){ var d=new Date(); return new Date(d.getTime()+d.getTimezoneOffset()*60000+3*3600000); }
+  function pad(n){return (n<10?'0':'')+n;}
+  function weekend(d){ var w=d.getDay(); return w===5||w===6||w===0; }
+  function liveLine(){
+    var d=msk(), h=d.getHours(), m=d.getMinutes(), t=pad(h)+':'+pad(m), mins=h*60+m, msg;
+    var days = weekend(d) ? 'цены выходных' : 'цены будней';
+    if(h>=22||h<8) msg='действует пакет <b>Ночь</b> до 10:00';
+    else if(h<17) msg='днём <b>95 ₽/час</b> в Стандарте до 17:00';
+    else if(h<20) msg='пакет <b>3 часа</b> можно купить до 20:00';
+    else msg='<b>Ночь</b> начнётся через '+(22*60-mins)+' мин';
+    document.getElementById('now-t').innerHTML='Сейчас <b class="num">'+t+'</b> — '+msg+' · '+days;
+  }
+  liveLine(); setInterval(liveLine,20000);
+
+  /* ─── лента: пауза с клавиатуры ─── */
+  var rib=document.getElementById('ribbon'), rp=rib.querySelector('.pause');
+  rp.addEventListener('click',function(){ var p=rib.classList.toggle('paused'); rp.setAttribute('aria-pressed',String(p)); rp.setAttribute('aria-label',p?'Запустить бегущую строку':'Остановить бегущую строку'); });
+
+  /* ─── данные: цены и железо (content-plan §9) ─── */
+  var P={
+    km:{name:'Карла Маркса, 38',zones:{standard:{'1':[150,170],'3':[400,460],'5':[580,640],night:[800,900]},vip:{'1':[165,185],'3':[445,490],'5':[640,710],night:[850,950]}}},
+    gs:{name:'Героев-Североморцев, 62',zones:{standard:{'1':[175,195],'3':[465,520],'5':[680,740],night:[880,980]},vip:{'1':[195,215],'3':[520,580],'5':[760,850],night:[990,1080]},solo:{'1':[215,240],'3':[590,630],'5':[850,940],night:[1100,1200]},ps5:450,projector:800}}
+  };
+  var BOOK={km:'https://langame.ru/799454172_computerniy_club_baza_murmansk',gs:'https://langame.ru/799454404_computerniy_club_baza-geroev-severomorcev_murmansk'};
+  var ZN={standard:'Стандарт',vip:'Bootcamp',solo:'Solo',ps5:'TV с PS5',projector:'Проекторная'};
+  var HW={standard:{cpu:'i5-10400F',gpu:'RTX 3060',ram:'16 GB',mon:'ASUS TUF 144 Гц'},vip:{cpu:'i7-12700F',gpu:'RTX 4060',ram:'32 GB',mon:'Lenovo Legion 240 Гц'},solo:{cpu:'i7-12700F',gpu:'RTX 4070',ram:'32 GB',mon:'BenQ 2K 240 Гц'}};
+  var PK={'1':{n:'1 час',h:1},'3':{n:'3 часа',h:3,note:'купить можно с 08:00 до 20:00'},'5':{n:'5 часов',h:5},night:{n:'Ночь',h:12,note:'с 22:00 до 10:00'}};
+  function rub(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+
+  /* ─── схема зала ─── */
+  var board=document.getElementById('board'), legend=document.getElementById('legend'), card=document.getElementById('seat-card');
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab][data-club]')), club='km';
+  var defaults={km:'17',gs:'27'};
+  function svgOf(c){ return document.querySelector('#mp-'+c+' svg'); }
+  ['km','gs'].forEach(function(c){
+    var s=svgOf(c);
+    s.querySelectorAll('.seat,.room').forEach(function(g){ g.setAttribute('tabindex','0'); g.setAttribute('role','button'); });
+  });
+  function count(c,z){ return svgOf(c).querySelectorAll('.seat.z-'+z).length; }
+  function renderLegend(){
+    var items=[['standard','','Стандарт'],['vip','v','Bootcamp · VIP']];
+    if(club==='gs') items.push(['solo','s','Solo'],['rooms','r','PS5 и проекторная']);
+    legend.innerHTML=items.map(function(it){
+      var n = it[0]==='rooms' ? '3 комнаты' : count(club,it[0]);
+      return '<li class="'+it[1]+'"><button type="button" aria-pressed="false" data-z="'+it[0]+'"><i></i>'+it[2]+'<span class="n">'+n+'</span></button></li>';
+    }).join('');
+  }
+  legend.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var on=b.getAttribute('aria-pressed')!=='true';
+    legend.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    if(on){ b.setAttribute('aria-pressed','true'); board.dataset.focus=b.dataset.z; } else delete board.dataset.focus;
+  });
+  legend.addEventListener('mouseover',function(e){ var b=e.target.closest('button'); if(b && !legend.querySelector('[aria-pressed=true]')) board.dataset.focus=b.dataset.z; });
+  legend.addEventListener('mouseleave',function(){ if(!legend.querySelector('[aria-pressed=true]')) delete board.dataset.focus; });
+
+  function select(g){
+    svgOf(club).querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel');});
+    g.classList.add('sel');
+    var z=g.dataset.zone, html;
+    if(z==='ps5'||z==='projector'){
+      var cap = z==='ps5' ? 'до 4 человек · 2 геймпада' : 'до 10 человек · PS5, стол и два дивана';
+      var nm = z==='ps5' ? 'PS5 · '+g.dataset.room.slice(-1) : 'Проекторная';
+      html='<div class="t"><b>'+nm+'</b><span>Комната</span></div><dl><dt>Кто поместится</dt><dd>'+cap+'</dd><dt>Клуб</dt><dd>'+P[club].name+'</dd></dl>'+
+        '<p class="pr num">'+rub(P[club].zones[z])+' ₽ в час<small>за всю комнату</small></p>';
+    } else {
+      var hw=HW[z], pr=P[club].zones[z]['1'];
+      var label = z==='solo' ? g.querySelector('text').textContent : 'Место '+g.dataset.seat;
+      html='<div class="t"><b class="num">'+label+'</b><span>'+ZN[z]+'</span></div><dl>'+
+        '<dt>Видеокарта</dt><dd>'+hw.gpu+'</dd><dt>Процессор</dt><dd>'+hw.cpu+'</dd><dt>Память</dt><dd>'+hw.ram+'</dd><dt>Монитор</dt><dd>'+hw.mon+'</dd></dl>'+
+        '<p class="pr num">'+pr[0]+' ₽ в час<small>в будни, '+pr[1]+' ₽ в выходные · пакеты — в калькуляторе ниже</small></p>';
+    }
+    html+='<a class="btn sm" href="'+BOOK[club]+'" target="_blank" rel="noopener">Забронировать в LANGAME <span class="ar" aria-hidden="true">→</span></a>';
+    card.innerHTML=html;
+  }
+  function onPick(e){ var g=e.target.closest('.seat,.room'); if(g) select(g); }
+  board.addEventListener('click',onPick);
+  board.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ') && e.target.closest('.seat,.room')){ e.preventDefault(); select(e.target.closest('.seat,.room')); } });
+  function showClub(c){
+    club=c;
+    tabs.forEach(function(t){ var on=t.dataset.club===c; t.setAttribute('aria-selected',String(on)); t.tabIndex=on?0:-1; document.getElementById('mp-'+t.dataset.club).hidden=!on; });
+    delete board.dataset.focus; renderLegend();
+    var g=svgOf(c).querySelector('.seat[data-seat="'+defaults[c]+'"]'); if(g) select(g);
+    if(board.classList.contains('lit')){ board.classList.remove('lit'); void board.offsetWidth; requestAnimationFrame(function(){ board.classList.add('lit'); }); }
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ showClub(t.dataset.club); });
+    t.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ var n=tabs[(i+1)%tabs.length]; n.focus(); showClub(n.dataset.club); } });
+  });
+  document.querySelectorAll('a[href="#map"][data-club]').forEach(function(a){ a.addEventListener('click',function(){ showClub(a.dataset.club); }); });
+  showClub('km');
+
+  /* ─── калькулятор ─── */
+  var fz=document.getElementById('f-zone'), fp=document.getElementById('f-pack'), f=document.getElementById('calc-f');
+  var app=document.getElementById('app');
+  var dw=document.getElementById('d-we'); if(weekend(msk())) dw.checked=true;
+  function radios(el,name,list,cur){
+    el.innerHTML=list.map(function(it){ var id=name+'-'+it[0]; return '<input type="radio" name="'+name+'" id="'+id+'" value="'+it[0]+'"'+(it[0]===cur?' checked':'')+'><label for="'+id+'">'+it[1]+'</label>'; }).join('');
+  }
+  var state={zone:'standard',pack:'1'};
+  function val(n){ var x=f.querySelector('input[name='+n+']:checked'); return x?x.value:null; }
+  var shown=0, anim;
+  function tween(to){
+    var el=document.getElementById('o-price');
+    if(reduce||!shown){ el.textContent=rub(to); shown=to; return; }
+    cancelAnimationFrame(anim); var from=shown, t0=performance.now();
+    (function step(t){ var k=Math.min(1,(t-t0)/380), e=1-Math.pow(1-k,3); el.textContent=rub(Math.round(from+(to-from)*e)); if(k<1) anim=requestAnimationFrame(step); })(t0);
+    shown=to;
+  }
+  function build(){
+    var c=val('club'), zones=Object.keys(P[c].zones);
+    if(zones.indexOf(state.zone)<0) state.zone='standard';
+    radios(fz,'zone',zones.map(function(z){return [z,ZN[z]];}),state.zone);
+    var room = state.zone==='ps5'||state.zone==='projector';
+    var packs = room ? [['1','1 час'],['2','2 часа'],['3','3 часа'],['4','4 часа']] : [['1','1 час'],['3','3 часа'],['5','5 часов'],['night','Ночь']];
+    if(!packs.some(function(p){return p[0]===state.pack;})) state.pack = room ? '2' : '3';
+    document.getElementById('pack-l').textContent = room ? 'Сколько часов' : 'Пакет';
+    radios(fp,'pack',packs,state.pack);
+    var dayOk = !room && state.zone==='standard' && state.pack==='1';
+    f.querySelectorAll('input[name=time]').forEach(function(i){ i.disabled=!dayOk; });
+    document.getElementById('time-n').textContent = dayOk ? 'Днём час в Стандарте — 95 ₽, каждый день.' : 'Дневная цена 95 ₽ — для часа в Стандарте.';
+    var dayOn = dayOk && val('time')==='day';
+    f.querySelectorAll('input[name=days]').forEach(function(i){ i.disabled=room||dayOn; });
+    app.disabled=room;
+    document.getElementById('app-n').textContent = room ? 'скидка 5 % — к брони ПК' : '−5 % к брони ПК';
+    calc();
+  }
+  function calc(){
+    var c=val('club'), z=state.zone, p=state.pack, we=+val('days'), room=z==='ps5'||z==='projector';
+    var base, facts=[], what;
+    if(room){
+      var h=+p; base=P[c].zones[z]*h;
+      what=ZN[z]+' · '+(h===1?'1 час':h+' часа');
+      facts.push('<b>'+rub(P[c].zones[z])+' ₽</b> в час за всю комнату');
+      facts.push(z==='ps5' ? 'до 4 человек, 2 геймпада' : 'до 10 человек, есть PS5');
+      facts.push('только на Героев-Североморцев, 62');
+      document.getElementById('o-old').textContent='';
+      tween(base);
+    } else {
+      var pk=PK[p], dayOn = z==='standard' && p==='1' && val('time')==='day';
+      base = dayOn ? 95 : P[c].zones[z][p][we];
+      var price = app.checked ? Math.round(base*0.95) : base;
+      what=ZN[z]+' · '+pk.n+' · '+(dayOn?'днём':(we?'Пт–Вс':'Пн–Чт'));
+      document.getElementById('o-old').textContent = app.checked ? rub(base)+' ₽' : '';
+      if(pk.note) facts.push(pk.n+' — '+pk.note);
+      if(pk.h>1) facts.push('<b>'+Math.round(price/pk.h)+' ₽</b> за час в пересчёте');
+      if(p!=='1'){ var hourly=P[c].zones[z]['1'][we]*pk.h; facts.push('почасово вышло бы <b>'+rub(hourly)+' ₽</b>'); }
+      if(dayOn) facts.push('каждый день с 08:00 до 17:00, на обеих точках');
+      else if(z==='standard' && p==='1') facts.push('днём с 08:00 до 17:00 — <b>95 ₽</b> за час');
+      tween(price);
+    }
+    document.getElementById('o-what').textContent=what+' · '+(c==='km'?'Карла Маркса':'Героев-Североморцев');
+    document.getElementById('calc-book').href=BOOK[c];
+    document.getElementById('o-facts').innerHTML=facts.map(function(x){return '<li>'+x+'</li>';}).join('');
+  }
+  f.addEventListener('change',function(e){
+    if(e.target.name==='zone'){ state.zone=e.target.value; build(); return; }
+    if(e.target.name==='pack'){ state.pack=e.target.value; build(); return; }
+    if(e.target.name==='time'){ build(); return; }
+    if(e.target.name==='club'){ build(); return; }
+    calc();
+  });
+  f.addEventListener('submit',function(e){e.preventDefault();});
+  build();
+
+  /* ─── железо: липкая история ─── */
+  var figs=[].slice.call(document.querySelectorAll('.stage figure'));
+  var countEl=document.querySelector('.stage [data-count]'), counted=false;
+  function countUp(){
+    if(counted||reduce) return; counted=true; var t0=performance.now();
+    (function s(t){ var k=Math.min(1,(t-t0)/700), v=Math.round(60+(240-60)*(1-Math.pow(1-k,3))); countEl.textContent=v+' Гц'; if(k<1) requestAnimationFrame(s); })(t0);
+  }
+  /* Активный шаг — тот, что стоит на середине экрана, пересчёт на прокрутке.
+     Раньше это делал IntersectionObserver с узкой полосой rootMargin, но во фрейме
+     с другого домена (превью-артефакт) браузер rootMargin игнорирует: «видны» все
+     шаги сразу, и фото переключалось как попало или не переключалось вовсе. */
+  var steps=[].slice.call(document.querySelectorAll('.step')), curStep=-1, stepQ=false;
+  function pickStep(){
+    stepQ=false;
+    var mid=innerHeight/2, best=0, bd=Infinity;
+    steps.forEach(function(s,i){ var r=s.getBoundingClientRect(), d=r.top>mid?r.top-mid:(r.bottom<mid?mid-r.bottom:0); if(d<bd){ bd=d; best=i; } });
+    if(best!==curStep){ curStep=best; figs.forEach(function(fg){ fg.classList.toggle('on',+fg.dataset.step===best); }); }
+    if(best===0){ var r0=steps[0].getBoundingClientRect(); if(r0.top<innerHeight*.7 && r0.bottom>0) countUp(); }
+  }
+  function queueStep(){ if(!stepQ){ stepQ=true; requestAnimationFrame(pickStep); } }
+  addEventListener('scroll',queueStep,{passive:true}); addEventListener('resize',queueStep); pickStep();
+  if('IntersectionObserver' in window){
+
+    /* схема: места загораются, когда схема показалась */
+    var mo=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ board.classList.add('lit'); mo.disconnect(); } },{threshold:.35});
+    mo.observe(board);
+
+    /* появления: прячем только то, что ниже первого экрана; показываем один раз */
+    var els=[].slice.call(document.querySelectorAll('.h2,.lead,.panel .body,.tile,.plist li,.room-c,.day,.nag-l,.shots,.week,.earn,.nag-steps,.rv,.calc .box,.qa details,.rate .score,.spec-t'));
+    if(!reduce){
+      var ro=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('show'); en.target.classList.remove('pre'); ro.unobserve(en.target); } }); },{rootMargin:'0px 0px -8% 0px'});
+      els.forEach(function(el){ if(el.getBoundingClientRect().top>innerHeight){ el.classList.add('pre'); ro.observe(el); } });
+    }
+  } else { board.classList.add('lit'); }
+
+
+  /* ─── отзывы: лента. Самые подробные положительные отзывы с Яндекс Карт и 2ГИС (выгрузка 30.09.2026) —
+     текст дословно, с именем, датой, клубом и ссылкой на отзывы этой точки. ─── */
+  var REVIEWS=[
+    {stars:5, text:"Зашёл недавно — остался доволен. Нормальное место без лишнего пафоса.\n\nПлюсы:\n\n· Железо актуальное, мониторы 240 Гц, всё тянет без лагов.\n· Периферия чистая, не засаленная.\n· Кондиционер работает, запахов посторонних нет.\n· Админы адекватные, проблемы решают быстро.\n· Цены нормальные, есть бонусы для постоянников.\n\nМинусы:\n\n· Вечером бывает шумно.\n· Меню снеков скудноватое.\n\nИтог: крепкий клуб для спокойной игры. Приду ещё", name:"данил б.", date:"17 сентября 2026", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"},
+    {stars:5, text:"Отличный ПК-клуб! Компьютеры мощные, всё работает стабильно и без лагов. В помещении чисто и комфортно, атмосфера приятная. Персонал вежливый и отзывчивый, всегда готовы помочь, если возникают вопросы. Цены вполне адекватные. Отличное место, чтобы поиграть с друзьями или просто хорошо провести время. Обязательно приду ещё!", name:"Городской житель", date:"12 сентября 2026", club:"Карла Маркса, 38", src:"2ГИС", url:"https://2gis.ru/murmansk/firm/70000001088267283/tab/reviews"},
+    {stars:5, text:"Классный клуб,мощное железо,большой выбор напитков и снеков,админ Даша вообще самая лучшая,помогла мне,все объяснила!", name:"Сеня Ким", date:"18 сентября 2026", club:"Героев-Североморцев, 62", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/44333217761/reviews/"},
+    {stars:5, text:"Сходил один раз по совету друга и теперь регулярно посещаю заведение. Для начала очень позитивный, общительный и отзывчивый коллектив администраторов (подскажут что угодно). Ооочень оригинальный дизайн интерьера, не могу описать словами как тут красиво и комфортно. По железу могу сказать что во все играю и все на ультрах 10/10. Всеобщая оценка заведению все 10/5!!!", name:"Георгий Рыков", date:"29 декабря 2024", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"},
+    {stars:5, text:"Компьютерный клуб расположен практически в центре, это очень удобно. В самом помещении чисто, администраторы на высоте. На баре есть и попить, и покушать. Спасибо Вам.", name:"Денис Смагин", date:"9 сентября 2026", club:"Карла Маркса, 38", src:"2ГИС", url:"https://2gis.ru/murmansk/firm/70000001088267283/tab/reviews"},
+    {stars:5, text:"Хожу в него уже 2 год, так и ненаедает туда ходить, администрация вежливая,\nНравится то что железо отличное не тормозит, праздновали день рождения недавно, понравилось советую туда ходить👍👍", name:"Артём Хуртов", date:"12 сентября 2026", club:"Героев-Североморцев, 62", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/44333217761/reviews/"},
+    {stars:5, text:"Отличный компьютерный клуб! Быстрая скорость интернета, мощные компьютеры, удобные кресла и приятная атмосфера. Персонал вежливый и отзывчивый, всегда готовы помочь. Цены вполне адекватные. Рекомендую всем любителям компьютерных игр.", name:"Вафадар Ибрагимов", date:"20 декабря 2024", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"},
+    {stars:5, text:"Мощное железо, все игры в которые я играю есть, отзывчивый персонал, все доходчиво объяснили, разнообразный выбор напитков, рекомендую 👍", name:"Глеб", date:"2 сентября 2026", club:"Карла Маркса, 38", src:"2ГИС", url:"https://2gis.ru/murmansk/firm/70000001088267283/tab/reviews"},
+    {stars:5, text:"Очень приятно удивлен компьютерному клубу !)\nПозвали товарищи провести ночь в этом заведении , все понравилось\nАккуратно, везде чисто , администрация хорошая и культурная, все по геймингу понравилось, никаких вопросов\nСтавлю 10/10\nСпасибо)", name:"Даниил Губин", date:"4 октября 2024", club:"Героев-Североморцев, 62", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/44333217761/reviews/"},
+    {stars:5, text:"Это очень классный клуб , админы добрые , пк классные, цены адекватные, и механическая клавиатура есть даже в стандарте хоть в других клубах нету в стандарте механической клавиатуры советую !", name:"Bbodyt", date:"27 января 2025", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"},
+    {stars:5, text:"Прекрасное место , очень мощные компьютеры , прекрасная атмосфера киберспорта . Буду часто сюда ходить . Буду советовать всем кого вижу и родителям в том числе.", name:"Семен Ундаков", date:"15 марта 2025", club:"Карла Маркса, 38", src:"2ГИС", url:"https://2gis.ru/murmansk/firm/70000001088267283/tab/reviews"},
+    {stars:5, text:"Отличные мощные компы, тянут все! Клавы и мышки не в чипсах! Все чисто! Персонал вежливый! Часто радуют акциями и организовывают турниры! Жду по кс2!", name:"Артём А.", date:"19 декабря 2024", club:"Героев-Североморцев, 62", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/44333217761/reviews/"},
+    {stars:5, text:"Хожу всегда с другом, уходим всегда довольные, клавиатура не громкая, не мешает другим и мне, монитор можно передвинуть на тот уровень какой ты хочешь, кресла очень мягкие , чувствуется комфортик", name:"Инкогнито 7988", date:"25 декабря 2024", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"},
+    {stars:5, text:"Внутри чисто, современный ремонт и комфортные кресла. Компьютеры мощные, нет лагов даже в требовательных играх. Из плюсов — приветливый персонал, низкие цены", name:"Стёпа Аксенов", date:"6 марта 2025", club:"Карла Маркса, 38", src:"Яндекс Карты", url:"https://yandex.ru/maps/org/baza/23967097444/reviews/"}
+  ];
+  var track=document.getElementById('rv-track');
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  if(REVIEWS.length){
+    track.innerHTML=REVIEWS.map(function(r){ return '<article class="rv"><p class="st" aria-label="Оценка '+r.stars+' из 5">'+'★'.repeat(r.stars)+'</p><q>'+esc(r.text)+'</q><p class="who"><span><b>'+esc(r.name)+'</b> · '+esc(r.club)+' · '+esc(r.src)+'</span><a class="link" href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.date)+'</a></p></article>'; }).join('');
+  } else {
+    var ph='<article class="rv ph"><div class="lines"><i style="width:92%"></i><i></i><i style="width:84%"></i><i style="width:96%"></i><i style="width:60%"></i></div><p>Место для отзыва с Яндекс Карт: текст дословно, имя, дата и клуб.</p></article>';
+    track.innerHTML=ph+ph+ph+ph+ph;
+  }
+  /* автопрокрутка: вторая копия карточек даёт бесшовный круг */
+  track.innerHTML+=track.innerHTML.replace(/<article /g,'<article aria-hidden="true" ');
+  var paused=false, resumeT, pos=0;
+  function hold(){ paused=true; clearTimeout(resumeT); }
+  function release(ms){ clearTimeout(resumeT); resumeT=setTimeout(function(){ paused=false; pos=track.scrollLeft; }, ms||0); }
+  track.addEventListener('mouseenter',hold); track.addEventListener('mouseleave',function(){ release(300); });
+  track.addEventListener('focusin',hold); track.addEventListener('focusout',function(){ release(300); });
+  track.addEventListener('pointerdown',hold); track.addEventListener('touchstart',hold,{passive:true});
+  track.addEventListener('touchend',function(){ release(2500); });
+  if(!reduce){
+    var last=0;
+    (function tick(t){
+      if(!paused && last){ var half=track.scrollWidth/2; pos+= (t-last)*0.035; if(pos>=half) pos-=half; track.scrollLeft=pos; }
+      else pos=track.scrollLeft;
+      last=t; requestAnimationFrame(tick);
+    })(0);
+  }
+  function slide(d){ var c=track.querySelector('.rv'); var w=c?c.getBoundingClientRect().width+14:300; hold(); track.scrollBy({left:d*w,behavior:reduce?'auto':'smooth'}); release(1500); }
+  document.getElementById('rv-prev').addEventListener('click',function(){ slide(-1); });
+  document.getElementById('rv-next').addEventListener('click',function(){ slide(1); });
+
+  /* ─── бронь: общие кнопки спрашивают клуб, у каждой точки своя страница в LANGAME ─── */
+  (function(){
+    var dlg=document.getElementById('book-dlg'); if(!dlg||!dlg.showModal) return;
+    document.addEventListener('click',function(e){ var a=e.target.closest('[data-book]'); if(!a) return; e.preventDefault(); dlg.showModal(); });
+    document.getElementById('book-x').addEventListener('click',function(){ dlg.close(); });
+    dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); if(e.target.closest('a.c')) dlg.close(); });
+  })();
+
+  /* ─── липкая панель на телефоне ─── */
+  var rb=document.getElementById('route-btn'), sh=document.getElementById('sheet');
+  rb.addEventListener('click',function(){ var o=sh.hidden; sh.hidden=!o; rb.setAttribute('aria-expanded',String(o)); });
+  document.addEventListener('click',function(e){ if(!sh.hidden && !e.target.closest('#dock')){ sh.hidden=true; rb.setAttribute('aria-expanded','false'); } });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !sh.hidden){ sh.hidden=true; rb.setAttribute('aria-expanded','false'); rb.focus(); } });
+})();
+</script>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Цены БАЗЫ</title>
+<meta name="description" content="Цены компьютерного клуба БАЗА в Мурманске: пакеты 1, 3, 5 часов и Ночь по зонам обоих клубов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Раскладка: страница цен в той же тёмной основе, что и главная. Сверху переключатели дней и скидки,
+   ниже по клубу большая сетка «пакет × зона», комнаты и способы сэкономить. */
+:root{
+  color-scheme:dark;
+  --night:#07041A;--indigo:#170C48;--indigo-2:#221660;--line:#2C2470;
+  --ink:#F4F3FF;--ink-2:#ABA7D8;--ink-3:#8480BE;
+  --blue:#3C6EFF;--sky:#3CAFFF;--cyan:#01C2DE;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --g:clamp(16px,4vw,56px);--max:1320px;--ease:cubic-bezier(.2,.7,.2,1);
+  padding-top:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--night);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation:none!important}}
+body{margin:0;background:var(--night);color:var(--ink);font:17px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3,p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.kick{font:500 13px/1.2 var(--display);text-transform:uppercase;letter-spacing:.16em;color:var(--sky)}
+.btn{--bg:var(--blue);display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:12px;background:var(--bg);color:#fff;font:700 15px/1 var(--display);text-decoration:none;border:0;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(60,110,255,.8)}
+.btn.ghost{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(244,243,255,.5)}
+.top{position:sticky;top:0;z-index:50;background:rgba(7,4,26,.94);border-bottom:1px solid var(--line)}
+.top .bar{display:flex;align-items:center;gap:24px;height:68px;max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+.logo{display:block;width:104px;color:var(--ink)}
+.logo svg{display:block;width:100%;height:auto}
+.back{margin-left:auto;color:var(--ink-2);text-decoration:none;font-weight:500;min-height:44px;display:flex;align-items:center}
+.back:hover{color:var(--ink)}
+@media (max-width:640px){.top .btn{display:none}}
+
+.head{padding-block:clamp(48px,7vw,96px) 32px;display:grid;gap:18px}
+.head h1{font:900 clamp(56px,11vw,168px)/.86 var(--display);letter-spacing:-.05em;text-transform:uppercase}
+.head h1 .lt{font-weight:300}
+.head p{color:var(--ink-2);max-width:60ch}
+
+.ctrl{position:sticky;top:69px;z-index:40;background:rgba(7,4,26,.94);border-block:1px solid var(--line)}
+.ctrl .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;min-height:72px;padding-block:10px}
+.seg{display:inline-flex;padding:4px;border-radius:14px;background:var(--indigo);box-shadow:inset 0 0 0 1px var(--line);gap:4px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{min-height:44px;padding:0 16px;border-radius:10px;color:var(--ink-2);font:600 15px var(--body);cursor:pointer;display:inline-flex;align-items:center}
+.seg input:checked + label{background:var(--blue);color:#fff}
+.seg input:focus-visible + label{outline:2px solid var(--sky);outline-offset:2px}
+.switch{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:44px;font-weight:500}
+.switch input{appearance:none;width:52px;height:30px;border-radius:999px;background:var(--indigo-2);box-shadow:inset 0 0 0 1px var(--line);position:relative;cursor:pointer;flex:none;margin:0}
+.switch input::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:var(--ink);transition:transform .18s var(--ease)}
+.switch input:checked{background:var(--blue)}
+.switch input:checked::after{transform:translateX(22px)}
+.jump{margin-left:auto;display:flex;gap:18px;font-size:15px}
+.jump a{color:var(--ink-2);text-decoration:none}
+.jump a:hover{color:var(--ink)}
+@media (max-width:760px){.jump{display:none}}
+
+.club{padding-top:clamp(56px,7vw,96px);scroll-margin-top:150px}
+.club-h{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;min-height:220px;padding:clamp(20px,3vw,36px);display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.club-h img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.club-h::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,4,26,.92),rgba(7,4,26,.35))}
+.club-h h2{font:900 clamp(28px,4vw,56px)/1 var(--display);text-transform:uppercase;letter-spacing:-.02em}
+.club-h p{color:var(--ink-2)}
+.tbl{margin-top:12px;overflow-x:auto;border-radius:24px;background:#0B0726;box-shadow:inset 0 0 0 1px var(--line)}
+.grid-t{width:100%;border-collapse:collapse;min-width:340px}
+.grid-t th,.grid-t td{padding:clamp(12px,1.8vw,24px) clamp(10px,1.8vw,24px);text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.grid-t tbody tr:last-child th,.grid-t tbody tr:last-child td{border-bottom:0}
+.grid-t thead th{vertical-align:bottom}
+.grid-t .zn{display:block;font:700 clamp(13px,1.3vw,17px)/1.2 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.grid-t .hw{display:block;font-size:13px;color:var(--ink-2);margin-top:4px}
+.grid-t .z-vip .zn{color:#9DB6FF}.grid-t .z-solo .zn{color:var(--cyan)}
+.grid-t tbody th{width:24%}
+.grid-t .pk{display:block;font:700 clamp(15px,1.6vw,22px)/1.1 var(--display)}
+.grid-t .nt{display:block;font-size:13px;color:var(--ink-2);margin-top:6px;font-weight:400}
+.grid-t tr.night th .pk{color:var(--sky)}
+.grid-t td .v{font:900 clamp(22px,3vw,44px)/1 var(--display);letter-spacing:-.03em}
+.grid-t td .u{font:700 clamp(12px,1.2vw,18px) var(--display);margin-left:.2em}
+.grid-t td .o,.grid-t td .ph{display:block;font-size:13px;color:var(--ink-2);margin-top:6px}
+.grid-t td .ph{color:var(--ink-3)}
+.grid-t td s{color:var(--ink-3);font-size:13px;display:block;margin-top:4px}
+.grid-t tbody tr{transition:background .15s}
+.grid-t tbody tr:hover{background:rgba(60,110,255,.06)}
+@media (max-width:560px){.grid-t .hw,.grid-t .ph{display:none}.grid-t tbody th{width:auto}.grid-t th,.grid-t td{padding:12px 6px}.grid-t th:first-child,.grid-t td:first-child{padding-left:12px}.grid-t .zn{font-size:11px;letter-spacing:0}.grid-t .pk{font-size:13px}.grid-t .nt{font-size:11px}.grid-t td .v{font-size:19px}.grid-t td .u{font-size:10px}.grid-t td .o{font-size:11px}}
+
+.rooms{margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.room{background:var(--indigo);border-radius:22px;padding:22px;display:grid;gap:8px;align-content:start;box-shadow:inset 0 0 0 1px var(--line)}
+.room h3{font:700 16px/1.2 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.room .v{font:900 clamp(32px,3.4vw,48px)/1 var(--display);letter-spacing:-.03em}
+.room .v small{font:500 15px var(--body);letter-spacing:0;color:var(--ink-2);margin-left:6px}
+.room p{color:var(--ink-2);font-size:15px}
+@media (max-width:820px){.rooms{grid-template-columns:1fr}}
+
+.day{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 40px;padding:clamp(20px,3vw,36px) clamp(20px,3vw,40px);border-radius:28px;background:var(--sky);color:var(--indigo)}
+.day .n{font:900 clamp(80px,11vw,160px)/.8 var(--display);letter-spacing:-.06em}
+.day .n small{font-size:.3em;letter-spacing:0;font-weight:700}
+.day h2{font:900 clamp(22px,2.4vw,32px)/1.1 var(--display);text-transform:uppercase}
+.day p{font-size:17px;max-width:46ch;margin-top:8px}
+.day .btn{--bg:var(--indigo)}
+@media (max-width:900px){.day{grid-template-columns:1fr}}
+
+.save{padding-top:clamp(72px,9vw,130px)}
+.save h2{font:900 clamp(36px,6vw,80px)/1 var(--display);text-transform:uppercase;letter-spacing:-.02em}
+.save h2 .lt{font-weight:300}
+.save ul{list-style:none;margin:32px 0 0;padding:0;border-top:2px solid var(--ink)}
+.save li{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:8px 40px;align-items:baseline;padding:clamp(18px,2.4vw,30px) 0;border-bottom:1px solid var(--line)}
+.save .k{font:900 clamp(36px,5vw,72px)/.9 var(--display);letter-spacing:-.04em}
+.save h3{font:700 clamp(18px,1.8vw,24px)/1.2 var(--display);margin-bottom:6px}
+.save p{color:var(--ink-2)}
+.save a{color:var(--sky)}
+@media (max-width:760px){.save li{grid-template-columns:1fr}}
+
+.foot{margin-top:clamp(96px,12vw,150px);background:var(--indigo);padding-block:40px;color:var(--ink-2);font-size:15px}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+.foot b{color:var(--ink);user-select:all}
+.foot .wrap{align-items:center}
+.soc{display:flex;gap:8px}
+.soc a{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--night);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);transition:background .15s,box-shadow .15s}
+.soc a:hover{background:var(--indigo-2);box-shadow:inset 0 0 0 1px var(--sky)}
+.soc svg{width:22px;height:22px}
+.dock{display:none}
+@media (max-width:760px){
+  .dock{display:grid;grid-template-columns:1fr;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,4,26,.96);border-top:1px solid var(--line)}
+  .dock .btn{justify-content:center;min-height:50px}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+  .ctrl{top:69px}
+}
+/* выбор клуба для брони: у каждой точки своя страница в LANGAME */
+.bookd{border:0;padding:0;background:transparent;color:var(--ink);max-width:min(520px,calc(100vw - 32px));width:100%}
+.bookd::backdrop{background:rgba(7,4,26,.72)}
+.bookd .box{background:var(--indigo-2);border-radius:24px;padding:24px;display:grid;gap:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 1px var(--line)}
+.bookd .hd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bookd h2{font:900 24px/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:0}
+.bookd .x{width:44px;height:44px;border-radius:50%;border:0;background:var(--indigo);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.bookd a.c{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:16px 18px;border-radius:16px;background:var(--indigo);text-decoration:none;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .15s,background .15s}
+.bookd a.c:hover,.bookd a.c:focus-visible{background:#1D1356;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.bookd a.c b{font:700 18px/1.2 var(--display)}
+.bookd a.c span{grid-column:1;font-size:14px;color:var(--ink-2)}
+.bookd a.c i{grid-row:1/3;grid-column:2;font-style:normal;color:var(--sky);font:700 20px var(--display)}
+.bookd p.n{font-size:14px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 2400 1064"><g transform="translate(0.000000,1064.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M13885 10630 c-11 -5 -40 -9 -65 -9 -44 -1 -239 -33 -309 -50 -20 -5 -61 -15 -91 -21 -75 -17 -244 -70 -335 -105 -22 -9 -49 -19 -60 -22 -52 -17 -291 -146 -385 -208 -511 -338 -795 -867 -795 -1485 l0 -165 875 0 875 0 8 54 c25 181 161 303 407 367 85 23 376 26 465 5 126 -29 272 -117 352 -211 31 -37 93 -135 93 -148 0 -4 6 -19 14 -33 55 -106 61 -342 13 -482 -72 -206 -226 -352 -447 -420 -58 -18 -99 -21 -400 -24 -294 -4 -337 -6 -347 -21 -10 -12 -13 -186 -13 -792 0 -606 3 -780 13 -792 10 -14 58 -17 372 -21 377 -5 405 -8 555 -60 230 -78 391 -214 502 -423 123 -232 124 -535 2 -777 -102 -200 -285 -356 -504 -428 -155 -50 -177 -53 -390 -53 -211 0 -217 0 -366 49 -234 77 -446 278 -532 505 -41 110 -55 175 -80 370 l-7 55 -860 0 -860 0 -3 -110 c-6 -199 42 -557 104 -785 20 -73 73 -240 83 -265 5 -11 26 -60 46 -109 36 -87 70 -154 114 -226 11 -19 24 -42 28 -50 16 -37 130 -195 203 -282 147 -177 403 -387 585 -480 376 -193 575 -254 1070 -329 110 -17 713 -24 856 -10 199 19 303 31 354 40 28 6 91 17 140 27 940 173 1648 701 1935 1444 18 47 36 94 41 105 8 20 27 87 53 185 113 427 95 986 -46 1415 -34 104 -34 103 -87 215 -102 212 -219 371 -392 534 -128 121 -367 292 -470 338 -47 21 -47 22 85 142 329 302 544 837 540 1346 -3 263 -68 602 -154 795 -175 392 -340 616 -635 863 -141 119 -391 270 -560 339 -226 93 -494 164 -730 195 -108 14 -831 21 -860 8z"/> <path d="M22 10498 c-19 -19 -17 -7701 2 -7717 11 -9 464 -11 1873 -8 1822 4 1861 4 1988 24 213 34 307 54 470 98 79 21 251 81 300 104 11 6 43 20 70 32 521 227 956 637 1194 1125 137 281 188 440 242 759 28 163 31 555 5 720 -31 195 -74 371 -121 495 -149 390 -298 624 -569 896 -185 184 -294 270 -497 387 -98 56 -279 147 -295 147 -5 1 -27 9 -49 20 -22 11 -46 19 -53 20 -7 0 -20 4 -30 9 -21 11 -87 34 -167 56 -33 10 -80 23 -105 30 -25 8 -81 21 -125 29 -44 9 -105 20 -135 26 -207 42 -403 50 -1221 50 -626 0 -798 3 -805 13 -5 6 -7 215 -4 467 l5 455 1785 5 1785 5 3 869 c1 634 -1 872 -9 882 -16 19 -5518 21 -5537 2z m3628 -4476 c110 -35 134 -46 205 -87 312 -181 438 -561 307 -925 -77 -214 -267 -372 -542 -451 -53 -15 -1607 -26 -1622 -11 -10 10 -11 1479 -2 1494 4 6 313 8 797 5 773 -4 794 -4 857 -25z"/> <path d="M8191 8046 c-12 -18 -21 -36 -21 -39 0 -4 -21 -50 -46 -104 -25 -54 -82 -177 -126 -273 -44 -96 -102 -222 -129 -278 -27 -57 -49 -105 -49 -107 0 -2 -17 -41 -39 -87 -21 -46 -49 -105 -61 -133 -12 -27 -45 -97 -72 -155 -27 -58 -59 -125 -70 -150 -11 -25 -33 -72 -48 -105 -15 -33 -39 -85 -53 -115 -37 -81 -85 -186 -122 -265 -49 -106 -85 -184 -112 -245 -14 -30 -42 -91 -63 -135 -21 -44 -49 -105 -63 -135 -13 -30 -39 -86 -57 -125 -18 -38 -71 -153 -117 -255 -47 -102 -104 -225 -128 -275 -23 -49 -49 -106 -58 -125 -31 -71 -70 -157 -103 -227 -19 -40 -49 -106 -68 -145 -19 -40 -46 -100 -61 -133 -32 -71 -60 -132 -168 -365 -90 -193 -117 -251 -117 -255 0 -1 -27 -60 -60 -129 -33 -70 -60 -128 -60 -130 0 -2 -21 -48 -46 -102 -130 -277 -184 -394 -184 -399 0 -1 -24 -54 -54 -116 -66 -142 -96 -207 -176 -384 -10 -22 -44 -93 -74 -158 -31 -65 -56 -119 -56 -121 0 -2 -22 -50 -49 -107 -26 -57 -60 -129 -73 -159 -69 -150 -128 -277 -189 -408 -22 -45 -39 -84 -39 -86 0 -2 -24 -55 -54 -117 -50 -107 -68 -146 -132 -286 -43 -93 -84 -182 -125 -271 -22 -46 -39 -85 -39 -88 0 -2 -22 -51 -50 -108 l-50 -104 0 -145 c0 -123 2 -146 16 -151 29 -11 1884 -7 1904 4 11 6 31 35 45 65 14 30 37 81 51 112 15 32 50 108 79 168 29 61 62 133 75 160 39 87 96 210 178 385 9 19 25 45 36 57 l19 23 1509 0 1508 0 25 -40 c14 -22 25 -43 25 -46 0 -4 18 -43 39 -88 72 -149 120 -252 208 -446 65 -142 135 -288 152 -320 l19 -35 952 -3 c696 -1 956 1 966 9 11 9 14 45 14 145 0 131 -1 135 -34 206 -18 40 -48 103 -65 141 -17 37 -44 95 -60 130 -16 34 -43 92 -60 130 -17 37 -44 96 -61 132 -16 36 -44 95 -61 133 -17 37 -43 92 -56 122 -14 30 -50 106 -79 169 -30 62 -54 115 -54 117 0 2 -27 60 -60 130 -33 69 -60 128 -60 130 0 2 -24 54 -54 116 -29 62 -63 133 -74 158 -11 25 -39 86 -62 135 -23 50 -51 110 -62 135 -22 50 -63 138 -113 245 -101 218 -145 313 -175 380 -13 28 -46 100 -75 160 -29 61 -63 133 -75 160 -42 95 -72 160 -105 230 -18 39 -48 102 -65 140 -18 39 -45 97 -60 130 -15 33 -42 90 -59 128 -17 37 -44 96 -61 132 -16 36 -44 95 -61 133 -17 37 -46 99 -64 137 -18 39 -44 95 -58 125 -53 117 -91 198 -127 275 -45 95 -99 211 -130 280 -12 28 -35 77 -50 110 -15 33 -42 92 -60 130 -17 39 -49 106 -70 150 -21 44 -49 105 -63 135 -13 30 -39 87 -57 125 -18 39 -43 93 -55 120 -13 28 -46 99 -74 158 -28 60 -51 110 -51 112 0 2 -24 54 -54 116 -29 63 -64 139 -78 169 -65 141 -90 195 -117 253 -16 34 -43 92 -60 130 -17 37 -44 96 -61 132 -16 36 -43 93 -59 128 -16 34 -45 98 -66 142 -20 44 -62 134 -92 200 -30 66 -77 167 -104 223 -27 57 -49 106 -49 108 0 2 -27 60 -60 129 -33 69 -60 129 -60 134 0 4 -8 15 -18 24 -17 15 -62 17 -434 17 l-416 0 -21 -34z m463 -3168 c10 -24 28 -65 41 -93 12 -27 42 -95 65 -149 23 -54 45 -106 50 -115 23 -46 70 -151 70 -157 0 -4 11 -30 24 -58 13 -28 33 -73 45 -101 27 -62 32 -73 70 -157 17 -37 39 -88 50 -115 10 -26 35 -82 54 -123 19 -41 53 -120 77 -174 23 -54 46 -107 51 -118 5 -10 13 -26 18 -36 5 -10 35 -79 66 -153 62 -146 75 -174 129 -293 20 -43 39 -89 42 -102 l6 -24 -871 0 c-866 0 -871 0 -871 20 0 11 4 28 10 38 5 9 17 35 26 57 9 22 25 60 36 85 11 25 24 54 28 65 5 11 19 45 33 75 14 30 55 127 92 215 37 88 75 178 85 200 9 22 111 258 225 525 114 267 218 508 231 537 13 28 24 54 24 56 0 15 61 137 68 137 4 0 16 -19 26 -42z"/> <path d="M19638 7815 c-10 -13 -18 -27 -18 -31 0 -4 -11 -30 -24 -58 -13 -28 -37 -80 -54 -116 -16 -36 -44 -96 -62 -135 -66 -143 -88 -191 -110 -240 -12 -27 -42 -90 -65 -140 -24 -49 -93 -200 -155 -335 -161 -352 -167 -364 -221 -478 -27 -56 -49 -105 -49 -108 0 -2 -18 -44 -41 -92 -93 -197 -108 -230 -134 -287 -15 -33 -40 -87 -55 -120 -28 -59 -56 -122 -100 -220 -12 -27 -47 -101 -76 -163 -30 -62 -54 -114 -54 -116 0 -2 -27 -61 -60 -130 -33 -70 -60 -128 -60 -130 0 -3 -20 -47 -44 -98 -24 -51 -55 -118 -69 -148 -13 -30 -42 -91 -62 -135 -43 -93 -91 -194 -130 -280 -29 -63 -65 -142 -116 -252 -17 -38 -42 -92 -55 -121 -13 -28 -35 -77 -49 -107 -44 -98 -77 -168 -131 -284 -30 -62 -54 -114 -54 -116 0 -2 -23 -52 -51 -112 -28 -59 -61 -130 -74 -158 -47 -104 -84 -182 -113 -245 -16 -36 -52 -114 -80 -175 -28 -60 -70 -153 -95 -205 -24 -52 -53 -115 -65 -140 -11 -25 -39 -85 -62 -135 -23 -49 -49 -106 -57 -125 -9 -19 -30 -66 -48 -105 -18 -38 -48 -101 -65 -140 -45 -98 -87 -188 -125 -270 -18 -38 -42 -92 -55 -120 -12 -27 -35 -78 -51 -112 -16 -35 -43 -93 -60 -130 -17 -38 -49 -105 -70 -151 -22 -46 -39 -85 -39 -87 0 -1 -24 -54 -54 -116 -57 -121 -99 -213 -136 -294 -13 -27 -43 -93 -69 -145 l-45 -95 -4 -137 c-2 -88 0 -144 8 -157 l11 -21 948 0 c890 0 949 1 964 18 8 9 33 55 55 102 22 47 56 121 77 165 61 129 115 247 137 295 11 25 43 92 71 150 27 58 62 132 77 165 15 34 34 66 42 73 12 9 352 12 1527 10 l1512 -3 19 -35 c11 -19 39 -78 64 -130 24 -52 64 -139 90 -193 25 -54 46 -100 46 -102 0 -1 24 -54 54 -116 77 -163 126 -269 143 -309 9 -19 24 -47 35 -62 l19 -28 953 0 953 0 11 25 c7 15 12 75 12 139 0 126 11 91 -111 354 -16 34 -42 91 -59 127 -16 36 -43 94 -60 130 -16 36 -43 94 -60 130 -16 36 -44 95 -61 133 -17 37 -44 95 -60 130 -16 34 -43 92 -60 130 -17 37 -50 108 -74 157 -23 50 -52 113 -65 140 -12 28 -39 86 -60 130 -21 44 -48 103 -60 130 -24 53 -61 134 -115 250 -101 218 -140 303 -178 386 -14 30 -44 96 -67 145 -23 49 -54 116 -70 149 -15 33 -39 85 -53 115 -26 58 -66 145 -123 268 -72 153 -102 219 -124 267 -12 28 -38 84 -57 125 -20 41 -47 100 -60 130 -14 30 -40 87 -58 125 -90 194 -115 248 -180 390 -13 28 -46 99 -74 158 -28 60 -51 110 -51 112 0 2 -24 54 -54 116 -29 63 -64 139 -78 169 -14 30 -41 89 -61 130 -68 148 -95 206 -121 263 -55 121 -81 176 -132 285 -30 63 -54 115 -54 117 0 2 -23 52 -51 112 -83 177 -127 272 -222 478 -30 66 -72 156 -92 200 -41 88 -83 180 -122 265 -14 30 -50 106 -79 169 -30 62 -54 115 -54 117 0 2 -27 60 -60 130 -33 69 -60 128 -60 129 0 2 -23 53 -51 112 -28 59 -63 133 -76 163 -14 30 -39 84 -56 120 -16 36 -47 103 -68 150 -21 47 -45 96 -52 110 l-13 25 -424 2 -425 3 -17 -25z m452 -3149 c0 -13 18 -56 86 -203 13 -28 24 -54 24 -56 0 -3 16 -40 36 -84 37 -82 40 -87 75 -168 12 -27 32 -73 45 -101 13 -28 24 -54 24 -57 0 -7 53 -127 70 -158 4 -9 27 -61 50 -115 23 -54 53 -121 65 -149 54 -115 85 -185 85 -189 0 -3 14 -35 31 -73 16 -37 34 -77 39 -88 5 -11 20 -45 33 -75 14 -30 43 -100 67 -154 23 -54 46 -106 50 -115 26 -49 72 -157 77 -182 l6 -29 -872 0 c-691 0 -871 3 -871 13 0 10 272 656 329 782 10 22 28 65 41 95 12 30 26 59 31 65 5 5 9 15 9 21 0 7 14 43 31 81 40 90 44 100 69 158 12 28 25 59 30 70 5 11 18 43 30 70 25 58 29 68 69 158 17 38 31 71 31 74 0 2 14 34 30 70 17 35 30 70 30 77 0 6 4 16 9 22 5 5 32 64 61 132 31 72 58 122 66 122 8 0 14 -6 14 -14z"/> </g></symbol><symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol><symbol id="i-vk" viewBox="0 0 24 24"><path fill="currentColor" d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z"/></symbol></svg>
+<header class="top">
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="БАЗА, на главную"><svg viewBox="0 0 2400 1064" role="img" aria-label="БАЗА"><use href="#logo"/></svg></a>
+    <a class="back" href="index.html">← На главную</a>
+    <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать</a>
+  </div>
+</header>
+
+<main>
+  <section class="head wrap" aria-labelledby="h1">
+    <p class="kick">Прайс от 27.04.2026</p>
+    <h1 id="h1">Цены <span class="lt">БАЗЫ</span></h1>
+    <p>Пакеты одинаковые на обеих точках, цены отличаются. Будни — понедельник–четверг, выходные — пятница–воскресенье.</p>
+  </section>
+
+  <div class="ctrl" role="group" aria-label="Как показать цены">
+    <div class="wrap">
+      <div class="seg" role="radiogroup" aria-label="Дни">
+        <input type="radio" name="days" id="d-wd" value="0" checked><label for="d-wd">Пн–Чт</label>
+        <input type="radio" name="days" id="d-we" value="1"><label for="d-we">Пт–Вс</label>
+      </div>
+      <label class="switch" for="app"><input type="checkbox" id="app"><span>Бронь в приложении −5 %</span></label>
+      <nav class="jump" aria-label="Клубы"><a href="#km">Карла Маркса</a><a href="#gs">Героев-Североморцев</a></nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="day">
+      <p class="n num">95<small>₽</small></p>
+      <div><h2>Днём дешевле</h2><p>Каждый день с 08:00 до 17:00 — час в зоне Стандарт на обеих точках.</p></div>
+      <a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать</a>
+    </div>
+
+    <section class="club" id="km" aria-labelledby="km-h">
+      <div class="club-h"><img src="img/km-hall.jpg" alt="" width="1280" height="853" loading="lazy"><h2 id="km-h">Карла Маркса, 38</h2><p>22 ПК · Стандарт 16 · Bootcamp 6</p></div>
+      <div class="tbl" tabindex="0" role="region" aria-label="Цены, Карла Маркса"><table class="grid-t"><caption class="sr">Цены, Карла Маркса, 38</caption><thead><tr><th scope="col"><span class="sr">Пакет</span></th><th scope="col" class="z-standard"><span class="zn">Стандарт</span><span class="hw">RTX 3060 · 144 Гц</span></th><th scope="col" class="z-vip"><span class="zn">Bootcamp · VIP</span><span class="hw">RTX 4060 · 240 Гц</span></th></tr></thead><tbody><tr><th scope="row"><span class="pk">1 час</span></th><td data-wd="150" data-we="170" data-h="1"><b class="v num">150</b><span class="u">₽</span><span class="o num">Пт–Вс 170 ₽</span></td><td data-wd="165" data-we="185" data-h="1"><b class="v num">165</b><span class="u">₽</span><span class="o num">Пт–Вс 185 ₽</span></td></tr><tr><th scope="row"><span class="pk">3 часа</span><span class="nt">купить с 08:00 до 20:00</span></th><td data-wd="400" data-we="460" data-h="3"><b class="v num">400</b><span class="u">₽</span><span class="o num">Пт–Вс 460 ₽</span><span class="ph num">133 ₽/час</span></td><td data-wd="445" data-we="490" data-h="3"><b class="v num">445</b><span class="u">₽</span><span class="o num">Пт–Вс 490 ₽</span><span class="ph num">148 ₽/час</span></td></tr><tr><th scope="row"><span class="pk">5 часов</span></th><td data-wd="580" data-we="640" data-h="5"><b class="v num">580</b><span class="u">₽</span><span class="o num">Пт–Вс 640 ₽</span><span class="ph num">116 ₽/час</span></td><td data-wd="640" data-we="710" data-h="5"><b class="v num">640</b><span class="u">₽</span><span class="o num">Пт–Вс 710 ₽</span><span class="ph num">128 ₽/час</span></td></tr><tr class="night"><th scope="row"><span class="pk">Ночь</span><span class="nt">22:00–10:00</span></th><td data-wd="800" data-we="900" data-h="12"><b class="v num">800</b><span class="u">₽</span><span class="o num">Пт–Вс 900 ₽</span><span class="ph num">67 ₽/час</span></td><td data-wd="850" data-we="950" data-h="12"><b class="v num">850</b><span class="u">₽</span><span class="o num">Пт–Вс 950 ₽</span><span class="ph num">71 ₽/час</span></td></tr></tbody></table></div>
+    </section>
+
+    <section class="club" id="gs" aria-labelledby="gs-h">
+      <div class="club-h"><img src="img/gs-hall.jpg" alt="" width="1280" height="853" loading="lazy"><h2 id="gs-h">Героев-Североморцев, 62</h2><p>29 ПК · Стандарт 21 · Bootcamp 5 · Solo 3</p></div>
+      <div class="tbl" tabindex="0" role="region" aria-label="Цены, Героев-Североморцев"><table class="grid-t"><caption class="sr">Цены, Героев-Североморцев, 62</caption><thead><tr><th scope="col"><span class="sr">Пакет</span></th><th scope="col" class="z-standard"><span class="zn">Стандарт</span><span class="hw">RTX 3060 · 144 Гц</span></th><th scope="col" class="z-vip"><span class="zn">Bootcamp · VIP</span><span class="hw">RTX 4060 · 240 Гц</span></th><th scope="col" class="z-solo"><span class="zn">Solo</span><span class="hw">RTX 4070 · 240 Гц</span></th></tr></thead><tbody><tr><th scope="row"><span class="pk">1 час</span></th><td data-wd="175" data-we="195" data-h="1"><b class="v num">175</b><span class="u">₽</span><span class="o num">Пт–Вс 195 ₽</span></td><td data-wd="195" data-we="215" data-h="1"><b class="v num">195</b><span class="u">₽</span><span class="o num">Пт–Вс 215 ₽</span></td><td data-wd="215" data-we="240" data-h="1"><b class="v num">215</b><span class="u">₽</span><span class="o num">Пт–Вс 240 ₽</span></td></tr><tr><th scope="row"><span class="pk">3 часа</span><span class="nt">купить с 08:00 до 20:00</span></th><td data-wd="465" data-we="520" data-h="3"><b class="v num">465</b><span class="u">₽</span><span class="o num">Пт–Вс 520 ₽</span><span class="ph num">155 ₽/час</span></td><td data-wd="520" data-we="580" data-h="3"><b class="v num">520</b><span class="u">₽</span><span class="o num">Пт–Вс 580 ₽</span><span class="ph num">173 ₽/час</span></td><td data-wd="590" data-we="630" data-h="3"><b class="v num">590</b><span class="u">₽</span><span class="o num">Пт–Вс 630 ₽</span><span class="ph num">197 ₽/час</span></td></tr><tr><th scope="row"><span class="pk">5 часов</span></th><td data-wd="680" data-we="740" data-h="5"><b class="v num">680</b><span class="u">₽</span><span class="o num">Пт–Вс 740 ₽</span><span class="ph num">136 ₽/час</span></td><td data-wd="760" data-we="850" data-h="5"><b class="v num">760</b><span class="u">₽</span><span class="o num">Пт–Вс 850 ₽</span><span class="ph num">152 ₽/час</span></td><td data-wd="850" data-we="940" data-h="5"><b class="v num">850</b><span class="u">₽</span><span class="o num">Пт–Вс 940 ₽</span><span class="ph num">170 ₽/час</span></td></tr><tr class="night"><th scope="row"><span class="pk">Ночь</span><span class="nt">22:00–10:00</span></th><td data-wd="880" data-we="980" data-h="12"><b class="v num">880</b><span class="u">₽</span><span class="o num">Пт–Вс 980 ₽</span><span class="ph num">73 ₽/час</span></td><td data-wd="990" data-we="1080" data-h="12"><b class="v num">990</b><span class="u">₽</span><span class="o num">Пт–Вс 1 080 ₽</span><span class="ph num">82 ₽/час</span></td><td data-wd="1100" data-we="1200" data-h="12"><b class="v num">1 100</b><span class="u">₽</span><span class="o num">Пт–Вс 1 200 ₽</span><span class="ph num">92 ₽/час</span></td></tr></tbody></table></div>
+      <div class="rooms">
+        <div class="room"><h3>TV-комната с PS5</h3><p class="v num">450 ₽<small>в час</small></p><p>За комнату. До 4 человек, 2 геймпада.</p></div>
+        <div class="room"><h3>Проекторная с PS5</h3><p class="v num">800 ₽<small>в час</small></p><p>За всю компанию. До 10 человек.</p></div>
+      </div>
+    </section>
+
+    <section class="save" aria-labelledby="save-h">
+      <h2 id="save-h">Как <span class="lt">сэкономить</span></h2>
+      <ul>
+        <li><span class="k num">95 ₽</span><div><h3>Днём в Стандарте</h3><p>Каждый день с 08:00 до 17:00 на обеих точках.</p></div></li>
+        <li><span class="k num">−5 %</span><div><h3>Бронь в приложении</h3><p>К любой брони ПК в LANGAME. <a href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Открыть LANGAME</a></p></div></li>
+        <li><span class="k">PS5</span><div><h3>К ночному пакету</h3><p>До 2 часов в PS5-комнате бесплатно во время ночного пакета, если комната свободна. На Героев-Североморцев, 62.</p></div></li>
+        <li><span class="k">Пакеты</span><div><h3>3, 5 часов и Ночь</h3><p>Дешевле, чем брать по часу. Сколько выходит за час — под каждой ценой в сетке.</p></div></li>
+        <li><span class="k">Бонусы</span><div><h3>НАГРИНД</h3><p>Миссии, кейсы и уровни в мини-приложении клуба. <a href="index.html#nagrind">Что внутри</a></p></div></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Карла Маркса, 38 · <b class="num">+7 900 938-24-48</b></span>
+    <span>Героев-Североморцев, 62 · <b class="num">+7 900 938-13-01</b></span>
+    <span>Круглосуточно · цены по прайсу от 27.04.2026</span>
+    <div class="soc lg"><a href="https://t.me/base_51" target="_blank" rel="noopener" aria-label="БАЗА в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a><a href="https://vk.ru/baza_murmansk51" target="_blank" rel="noopener" aria-label="БАЗА во ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a></div>
+  </div>
+</footer>
+<dialog class="bookd" id="book-dlg" aria-labelledby="book-h">
+  <div class="box">
+    <div class="hd"><h2 id="book-h">Где играем?</h2><button type="button" class="x" id="book-x" aria-label="Закрыть">✕</button></div>
+    <a class="c" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener"><b>Карла Маркса, 38</b><span>Октябрьский округ · 22 ПК</span><i aria-hidden="true">→</i></a>
+    <a class="c" href="https://langame.ru/799454404_computerniy_club_baza-geroev-severomorcev_murmansk" target="_blank" rel="noopener"><b>Героев-Североморцев, 62</b><span>Ленинский округ · 29 ПК, Solo, PS5</span><i aria-hidden="true">→</i></a>
+    <p class="n">Бронь в приложении LANGAME — скидка 5&nbsp;%.</p>
+  </div>
+</dialog>
+<div class="dock"><a class="btn" href="https://langame.ru/799454172_computerniy_club_baza_murmansk" target="_blank" rel="noopener" data-book>Забронировать</a></div>
+
+<script>
+(function(){
+  /* ─── бронь: общие кнопки спрашивают клуб, у каждой точки своя страница в LANGAME ─── */
+  (function(){
+    var dlg=document.getElementById('book-dlg'); if(!dlg||!dlg.showModal) return;
+    document.addEventListener('click',function(e){ var a=e.target.closest('[data-book]'); if(!a) return; e.preventDefault(); dlg.showModal(); });
+    document.getElementById('book-x').addEventListener('click',function(){ dlg.close(); });
+    dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); if(e.target.closest('a.c')) dlg.close(); });
+  })();
+  function rub(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f'); }
+  var d=new Date(); var m=new Date(d.getTime()+d.getTimezoneOffset()*60000+3*3600000); var w=m.getDay();
+  if(w===5||w===6||w===0) document.getElementById('d-we').checked=true;
+  var app=document.getElementById('app');
+  function render(){
+    var we=document.getElementById('d-we').checked, disc=app.checked;
+    document.querySelectorAll('.grid-t td').forEach(function(td){
+      var base=+td.dataset[we?'we':'wd'], other=+td.dataset[we?'wd':'we'], h=+td.dataset.h;
+      var p=disc?Math.round(base*0.95):base;
+      td.querySelector('.v').textContent=rub(p);
+      td.querySelector('.o').textContent=(disc?'без скидки '+rub(base)+' ₽ · ':'')+(we?'Пн–Чт ':'Пт–Вс ')+rub(disc?Math.round(other*0.95):other)+' ₽';
+      var ph=td.querySelector('.ph'); if(ph) ph.textContent=Math.round(p/h)+' ₽/час';
+    });
+  }
+  document.querySelectorAll('input[name=days]').forEach(function(i){ i.addEventListener('change',render); });
+  app.addEventListener('change',render);
+  render();
+})();
+</script>
+</body>
+</html>
